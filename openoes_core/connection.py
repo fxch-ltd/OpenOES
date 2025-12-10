@@ -137,7 +137,7 @@ class RedisConnectionManager:
     
     def close(self):
         """Close all Valkey/Redis connections"""
-        logger.info("Closing Redis connections")
+        logger.info("Closing Valkey/Redis connections")
         self.wsp_client.close()
         self.replica_client.close()
     
