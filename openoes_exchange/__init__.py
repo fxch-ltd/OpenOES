@@ -3,7 +3,7 @@ OpenOES Community Edition SDK - Exchange Module
 
 This module provides components for Exchange integration with the OpenOES
 Community Edition system, including credit management, settlement processing,
-and account integration.
+and account integration over Valkey/Redis (Redis-compatible) streams.
 """
 
 __version__ = '0.1.0'

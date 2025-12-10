@@ -1,7 +1,8 @@
 """
 OpenOES Configuration Module
 
-This module provides standardized configuration options for the OpenOES SDK.
+This module provides standardized configuration options for the OpenOES SDK,
+including Valkey/Redis connection settings, ACL settings, and other SDK-specific options.
 """
 
 import os
@@ -19,7 +20,7 @@ class Configuration:
     Configuration class for OpenOES SDK.
     
     This class provides a unified interface for managing configuration options
-    for the OpenOES SDK, including Redis connection settings, ACL settings,
+    for the OpenOES SDK, including Valkey/Redis connection settings, ACL settings,
     and other SDK-specific options.
     """
     
@@ -110,7 +111,7 @@ class Configuration:
         logging.basicConfig(level=numeric_level, format=log_format)
     
     def get_wsp_redis_config(self) -> Dict[str, Any]:
-        """Get the WSP Redis configuration."""
+        """Get the WSP Valkey/Redis configuration."""
         return self.config.get("wsp_redis", {})
     
     def get_replica_redis_config(self) -> Dict[str, Any]:
@@ -290,7 +291,7 @@ class ConfigurationProfile:
         """
         Development configuration profile.
         
-        This profile is suitable for local development with a single Redis instance.
+        This profile is suitable for local development with a single Valkey/Redis instance.
         
         Returns:
             Configuration instance
@@ -322,7 +323,7 @@ class ConfigurationProfile:
         """
         Production configuration profile.
         
-        This profile is suitable for production deployments with separate Redis instances
+        This profile is suitable for production deployments with separate Valkey/Redis instances
         for WSP and Stream-Writeable Replica.
         
         Returns:
@@ -367,7 +368,7 @@ class ConfigurationProfile:
         """
         Testing configuration profile.
         
-        This profile is suitable for testing with a local Redis instance.
+        This profile is suitable for testing with a local Valkey/Redis instance.
         
         Returns:
             Configuration instance
@@ -377,14 +378,14 @@ class ConfigurationProfile:
                 "host": "localhost",
                 "port": 6379,
                 "password": "",
-                "db": 1,  # Use a different DB for testing
+                "db": 1,  # Use a different DB for testing (Valkey/Redis)
                 "decode_responses": True
             },
             "replica_redis": {
                 "host": "localhost",
                 "port": 6379,
                 "password": "",
-                "db": 1,  # Use a different DB for testing
+                "db": 1,  # Use a different DB for testing (Valkey/Redis)
                 "decode_responses": True
             },
             "logging": {

@@ -1,8 +1,8 @@
 """
-OpenOES Mock Redis Client
+OpenOES Mock Valkey/Redis Client
 
-This module provides a mock implementation of the Redis client for testing purposes.
-It simulates Redis functionality without requiring an actual Redis server.
+This module provides a mock implementation of the Valkey/Redis client for testing purposes.
+It simulates Valkey/Redis functionality without requiring an actual Valkey/Redis server.
 """
 
 import time
@@ -19,10 +19,10 @@ logger = logging.getLogger(__name__)
 
 class MockRedisClient:
     """
-    Mock implementation of the Redis client for testing purposes.
+    Mock implementation of the Valkey/Redis client for testing purposes.
     
-    This class simulates Redis functionality without requiring an actual Redis server.
-    It implements the most commonly used Redis commands, with a focus on those used
+    This class simulates Valkey/Redis functionality without requiring an actual Valkey/Redis server.
+    It implements the most commonly used Valkey/Redis commands, with a focus on those used
     by the OpenOES SDK.
     
     Attributes:
@@ -33,7 +33,7 @@ class MockRedisClient:
     """
     
     def __init__(self):
-        """Initialize the mock Redis client."""
+        """Initialize the mock Valkey/Redis client for testing Valkey/Redis operations."""
         # Key-value store
         self.data = {}
         
@@ -54,10 +54,10 @@ class MockRedisClient:
         self._stream_lock = threading.RLock()
         self._pubsub_lock = threading.RLock()
         
-        logger.debug("MockRedisClient initialized")
+        logger.debug("MockValkeyRedisClient initialized")
     
     def reset(self):
-        """Reset the mock Redis client to its initial state."""
+        """Reset the mock Valkey/Redis client to its initial state."""
         with self._data_lock:
             self.data = {}
         
@@ -69,7 +69,7 @@ class MockRedisClient:
         with self._pubsub_lock:
             self.pubsub_channels = defaultdict(list)
         
-        logger.debug("MockRedisClient reset")
+        logger.debug("MockValkeyRedisClient reset")
     
     #
     # Key-Value Operations
@@ -148,7 +148,7 @@ class MockRedisClient:
             if pattern == "*":
                 return list(self.data.keys())
             
-            # Convert Redis pattern to regex
+            # Convert Valkey/Redis pattern to regex
             regex_pattern = "^" + pattern.replace("*", ".*") + "$"
             regex = re.compile(regex_pattern)
             
@@ -385,7 +385,7 @@ class MockRedisClient:
         approximate: bool = True
     ) -> str:
         """
-        Add a new entry to a stream.
+        Add a new entry to a Valkey/Redis stream.
         
         Args:
             name: Stream name
@@ -438,7 +438,7 @@ class MockRedisClient:
         block: Optional[int] = None
     ) -> Optional[Dict[str, List[Tuple[str, Dict[str, str]]]]]:
         """
-        Read from multiple streams, starting at the given IDs.
+        Read from multiple Valkey/Redis streams, starting at the given IDs.
         
         Args:
             streams: Dictionary mapping stream names to IDs
@@ -487,7 +487,7 @@ class MockRedisClient:
         mkstream: bool = False
     ) -> bool:
         """
-        Create a consumer group.
+        Create a consumer group for Valkey/Redis streams.
         
         Args:
             name: Stream name
@@ -564,7 +564,7 @@ class MockRedisClient:
         noack: bool = False
     ) -> Optional[Dict[str, List[Tuple[str, Dict[str, str]]]]]:
         """
-        Read from multiple streams as part of a consumer group.
+        Read from multiple Valkey/Redis streams as part of a consumer group.
         
         Args:
             groupname: Consumer group name
@@ -834,21 +834,21 @@ class MockRedisClient:
     
     def acl_list(self) -> List[str]:
         """
-        Get the list of ACL rules.
+        Get the list of Valkey/Redis ACL rules.
         
         Returns:
-            List of ACL rules
+            List of ACL rules for Valkey/Redis authentication
         """
         # Mock implementation - return a default ACL rule
         return ["user default on nopass ~* &* +@all"]
     
     def acl_setuser(self, username: str, *rules: str) -> bool:
         """
-        Set ACL rules for a user.
+        Set ACL rules for a user in Valkey/Redis.
         
         Args:
             username: Username
-            *rules: ACL rules
+            *rules: ACL rules for Valkey/Redis authorization
             
         Returns:
             True if successful

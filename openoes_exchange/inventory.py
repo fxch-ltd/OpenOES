@@ -3,7 +3,8 @@ OpenOES Exchange Credit Inventory Processor
 
 This module provides functionality for managing credit inventory in the Exchange,
 including updating credit inventory during trading activities, handling automatic
-credit inventory decreases during settlement, and maintaining credit inventory state.
+credit inventory decreases during settlement, and maintaining credit inventory state
+using Valkey/Redis backend storage.
 """
 
 import time
@@ -152,11 +153,11 @@ class CreditInventoryProcessor:
         Initialize the credit inventory processor.
         
         Args:
-            connection_manager: Redis connection manager
+            connection_manager: Valkey/Redis (Redis-compatible) connection manager
         """
         self.connection_manager = connection_manager
         
-        # Get Redis clients
+        # Get Valkey/Redis (Redis-compatible) clients
         self.replica_client = connection_manager.get_replica_client()
         
         # Credit inventory cache (user_id -> {asset -> CreditInventoryEntry})
@@ -179,7 +180,7 @@ class CreditInventoryProcessor:
         Args:
             user_id: User identifier
             asset: Asset identifier
-            refresh: Whether to refresh from Redis
+            refresh: Whether to refresh from Valkey/Redis (Redis-compatible) storage
             
         Returns:
             Credit inventory entry if found, None otherwise
@@ -188,7 +189,7 @@ class CreditInventoryProcessor:
         if not refresh and user_id in self.credit_inventory and asset in self.credit_inventory[user_id]:
             return self.credit_inventory[user_id][asset]
         
-        # Get from Redis
+        # Get from Valkey/Redis (Redis-compatible) storage
         ci_key = KeyManager.credit_inventory(user_id, asset)
         ci_data = self.replica_client.hgetall(ci_key)
         
@@ -252,7 +253,7 @@ class CreditInventoryProcessor:
             
             self.credit_inventory[user_id][asset] = ci_entry
         
-        # Update Redis
+        # Update Valkey/Redis storage
         ci_key = KeyManager.credit_inventory(user_id, asset)
         self.replica_client.hset(ci_key, mapping=ci_entry.to_dict())
         
@@ -317,7 +318,7 @@ class CreditInventoryProcessor:
             
             self.credit_inventory[user_id][asset] = ci_entry
         
-        # Update Redis
+        # Update Valkey/Redis (Redis-compatible) storage
         ci_key = KeyManager.credit_inventory(user_id, asset)
         self.replica_client.hset(ci_key, mapping=ci_entry.to_dict())
         
@@ -376,7 +377,7 @@ class CreditInventoryProcessor:
         # Decrease existing entry
         ci_entry.decrease(amount, transaction_id)
         
-        # Update Redis
+        # Update Valkey/Redis storage
         ci_key = KeyManager.credit_inventory(user_id, asset)
         self.replica_client.hset(ci_key, mapping=ci_entry.to_dict())
         
@@ -402,7 +403,7 @@ class CreditInventoryProcessor:
         Returns:
             Dictionary mapping asset identifiers to credit inventory entries
         """
-        # Get from Redis
+        # Get from Valkey/Redis (Redis-compatible) storage
         ci_keys = self.replica_client.keys(KeyManager.credit_inventory(user_id, "*"))
         
         result = {}
@@ -606,6 +607,6 @@ class CreditInventoryProcessor:
         # Add to transaction log
         self.transaction_log[transaction_id] = log_entry
         
-        # In a real implementation, we would also store this in Redis
+        # In a real implementation, we would also store this in Valkey/Redis
         # For now, we'll just log it
         logger.debug(f"Logged transaction: {log_entry}")

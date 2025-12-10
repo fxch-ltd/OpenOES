@@ -1,7 +1,7 @@
 """
 OpenOES Stream Processing Module
 
-This module provides utilities for working with Redis Streams in the
+This module provides utilities for working with Valkey/Redis Streams in the
 OpenOES Community Edition architecture, including consumer groups,
 message processing, and error handling.
 """
@@ -26,10 +26,10 @@ def create_consumer_group(
     mkstream: bool = True
 ) -> bool:
     """
-    Create a consumer group for a Redis stream.
+    Create a consumer group for a Valkey/Redis stream.
     
     Args:
-        client: Redis client
+        client: Valkey/Redis client
         stream_name: Name of the stream
         group_name: Name of the consumer group
         start_id: ID to start consuming from ('0' for all messages, '$' for new messages only)
@@ -63,10 +63,10 @@ def add_message_to_stream(
     id: str = "*"
 ) -> Optional[str]:
     """
-    Add a message to a Redis stream with automatic trimming.
+    Add a message to a Valkey/Redis stream with automatic trimming.
     
     Args:
-        client: Redis client
+        client: Valkey/Redis client
         stream_name: Name of the stream
         message: Dictionary containing the message fields and values
         max_len: Maximum length of the stream
@@ -105,10 +105,10 @@ def read_messages(
     last_id: str = "$"
 ) -> List[List[Tuple[bytes, Dict[bytes, bytes]]]]:
     """
-    Read messages from a Redis stream.
+    Read messages from a Valkey/Redis stream.
     
     Args:
-        client: Redis client
+        client: Valkey/Redis client
         stream_name: Name of the stream
         count: Maximum number of messages to read
         block: Milliseconds to block waiting for messages (None for non-blocking)
@@ -141,10 +141,10 @@ def read_messages_from_group(
     last_id: str = ">"
 ) -> List[List[Tuple[bytes, Dict[bytes, bytes]]]]:
     """
-    Read messages from a Redis stream using a consumer group.
+    Read messages from a Valkey/Redis stream using a consumer group.
     
     Args:
-        client: Redis client
+        client: Valkey/Redis client
         stream_name: Name of the stream
         group_name: Name of the consumer group
         consumer_name: Name of the consumer
@@ -186,7 +186,7 @@ def acknowledge_message(
     Acknowledge a message in a consumer group.
     
     Args:
-        client: Redis client
+        client: Valkey/Redis client
         stream_name: Name of the stream
         group_name: Name of the consumer group
         message_id: ID of the message to acknowledge
@@ -220,7 +220,7 @@ def get_pending_messages(
     Get information about pending messages in a consumer group.
     
     Args:
-        client: Redis client
+        client: Valkey/Redis client
         stream_name: Name of the stream
         group_name: Name of the consumer group
         count: Maximum number of messages to return
@@ -264,7 +264,7 @@ def claim_pending_messages(
     Claim pending messages from another consumer.
     
     Args:
-        client: Redis client
+        client: Valkey/Redis client
         stream_name: Name of the stream
         group_name: Name of the consumer group
         consumer_name: Name of the consumer claiming the messages
@@ -299,10 +299,10 @@ def trim_stream(
     approximate: bool = True
 ) -> bool:
     """
-    Trim a Redis stream to a maximum length.
+    Trim a Valkey/Redis stream to a maximum length.
     
     Args:
-        client: Redis client
+        client: Valkey/Redis client
         stream_name: Name of the stream
         max_len: Maximum length of the stream
         approximate: Whether to use approximate trimming (more efficient)
@@ -334,7 +334,7 @@ def delete_message(
     Delete a message from a stream.
     
     Args:
-        client: Redis client
+        client: Valkey/Redis client
         stream_name: Name of the stream
         message_id: ID of the message to delete
         
@@ -361,7 +361,7 @@ def get_stream_info(
     Get information about a stream.
     
     Args:
-        client: Redis client
+        client: Valkey/Redis client
         stream_name: Name of the stream
         
     Returns:
@@ -395,7 +395,7 @@ def get_consumer_group_info(
     Get information about a consumer group.
     
     Args:
-        client: Redis client
+        client: Valkey/Redis client
         stream_name: Name of the stream
         group_name: Name of the consumer group
         
@@ -446,7 +446,7 @@ class StreamProcessor:
         Initialize the stream processor.
         
         Args:
-            client: Redis client
+            client: Valkey/Redis client
             stream_name: Name of the stream to process
             group_name: Name of the consumer group
             consumer_name: Name of this consumer (defaults to a UUID)
@@ -649,7 +649,7 @@ class StreamProcessor:
 
 class StreamPublisher:
     """
-    Publishes messages to Redis Streams with reliability features.
+    Publishes messages to Valkey/Redis Streams with reliability features.
     """
     
     def __init__(
@@ -663,7 +663,7 @@ class StreamPublisher:
         Initialize the stream publisher.
         
         Args:
-            client: Redis client
+            client: Valkey/Redis client
             stream_name: Name of the stream to publish to
             max_len: Maximum length of the stream
             approximate_trimming: Whether to use approximate trimming (more efficient)
@@ -748,13 +748,13 @@ def publish_event(
     max_len: int = 1000
 ) -> Optional[str]:
     """
-    Publish an event to a Redis stream.
+    Publish an event to a Valkey/Redis stream.
     
     This is a convenience function that formats the event with a timestamp
     and event type before adding it to the stream.
     
     Args:
-        client: Redis client
+        client: Valkey/Redis client
         stream_name: Name of the stream
         event_type: Type of event
         data: Event data

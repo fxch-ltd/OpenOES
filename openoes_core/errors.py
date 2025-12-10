@@ -20,7 +20,7 @@ class OpenOESError(Exception):
 
 
 class ConnectionError(OpenOESError):
-    """Exception raised for Redis connection errors."""
+    """Exception raised for Valkey/Redis connection errors."""
     
     def __init__(self, message: str, host: str = None, port: int = None, *args, **kwargs):
         self.host = host
@@ -31,7 +31,7 @@ class ConnectionError(OpenOESError):
 
 
 class ACLError(OpenOESError):
-    """Exception raised for Redis ACL errors."""
+    """Exception raised for Valkey/Redis ACL errors."""
     
     def __init__(self, message: str, username: str = None, *args, **kwargs):
         self.username = username
@@ -41,7 +41,7 @@ class ACLError(OpenOESError):
 
 
 class StreamError(OpenOESError):
-    """Exception raised for Redis Stream errors."""
+    """Exception raised for Valkey/Redis Stream errors."""
     
     def __init__(self, message: str, stream_name: str = None, *args, **kwargs):
         self.stream_name = stream_name
@@ -51,7 +51,7 @@ class StreamError(OpenOESError):
 
 
 class KeyError(OpenOESError):
-    """Exception raised for Redis key errors."""
+    """Exception raised for Valkey/Redis key errors."""
     
     def __init__(self, message: str, key: str = None, *args, **kwargs):
         self.key = key
@@ -148,13 +148,13 @@ class TimeoutError(OpenOESError):
 
 def handle_redis_error(func):
     """
-    Decorator to handle Redis errors and convert them to OpenOES errors.
+    Decorator to handle Valkey/Redis errors and convert them to OpenOES errors.
     
     Args:
         func: The function to decorate
         
     Returns:
-        Decorated function that handles Redis errors
+        Decorated function that handles Valkey/Redis errors
     """
     def wrapper(*args, **kwargs):
         try:

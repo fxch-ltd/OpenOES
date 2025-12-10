@@ -248,11 +248,11 @@ class AccountIntegration:
         Initialize the account integration.
         
         Args:
-            connection_manager: Redis connection manager
+            connection_manager: Valkey/Redis (Redis-compatible) connection manager for account data storage
         """
         self.connection_manager = connection_manager
         
-        # Get Redis clients
+        # Get Valkey/Redis (Redis-compatible) clients
         self.replica_client = connection_manager.get_replica_client()
         
         # Account cache (user_id -> {asset -> AccountEntry})
@@ -275,7 +275,7 @@ class AccountIntegration:
         Args:
             user_id: User identifier
             asset: Asset identifier
-            refresh: Whether to refresh from Redis
+            refresh: Whether to refresh from Valkey/Redis (Redis-compatible) storage
             
         Returns:
             Account entry if found, None otherwise
@@ -284,7 +284,7 @@ class AccountIntegration:
         if not refresh and user_id in self.accounts and asset in self.accounts[user_id]:
             return self.accounts[user_id][asset]
         
-        # Get from Redis
+        # Get from Valkey/Redis (Redis-compatible) storage
         account_key = KeyManager.account(user_id, asset)
         account_data = self.replica_client.hgetall(account_key)
         
@@ -363,7 +363,7 @@ class AccountIntegration:
             
             self.accounts[user_id][asset] = account_entry
         
-        # Update Redis
+        # Update Valkey/Redis storage
         account_key = KeyManager.account(user_id, asset)
         self.replica_client.hset(account_key, mapping=account_entry.to_dict())
         
@@ -436,7 +436,7 @@ class AccountIntegration:
             
             self.accounts[user_id][asset] = account_entry
         
-        # Update Redis
+        # Update Valkey/Redis (Redis-compatible) storage
         account_key = KeyManager.account(user_id, asset)
         self.replica_client.hset(account_key, mapping=account_entry.to_dict())
         
@@ -507,7 +507,7 @@ class AccountIntegration:
             transaction_id=transaction_id
         )
         
-        # Update Redis
+        # Update Valkey/Redis storage
         account_key = KeyManager.account(user_id, asset)
         self.replica_client.hset(account_key, mapping=account_entry.to_dict())
         
@@ -560,7 +560,7 @@ class AccountIntegration:
         # Reserve amount
         account_entry.reserve(amount, transaction_id)
         
-        # Update Redis
+        # Update Valkey/Redis storage
         account_key = KeyManager.account(user_id, asset)
         self.replica_client.hset(account_key, mapping=account_entry.to_dict())
         
@@ -613,7 +613,7 @@ class AccountIntegration:
         # Release reservation
         account_entry.release_reservation(amount, transaction_id)
         
-        # Update Redis
+        # Update Valkey/Redis storage
         account_key = KeyManager.account(user_id, asset)
         self.replica_client.hset(account_key, mapping=account_entry.to_dict())
         
@@ -639,7 +639,7 @@ class AccountIntegration:
         Returns:
             Dictionary mapping asset identifiers to account entries
         """
-        # Get from Redis
+        # Get from Valkey/Redis (Redis-compatible) storage
         account_keys = self.replica_client.keys(KeyManager.account(user_id, "*"))
         
         result = {}
@@ -741,7 +741,7 @@ class AccountIntegration:
             
             self.accounts[user_id][asset] = account_entry
         
-        # Update Redis
+        # Update Valkey/Redis (Redis-compatible) storage
         account_key = KeyManager.account(user_id, asset)
         self.replica_client.hset(account_key, mapping=account_entry.to_dict())
         
@@ -840,6 +840,6 @@ class AccountIntegration:
         # Add to transaction log
         self.transaction_log[transaction_id] = log_entry
         
-        # In a real implementation, we would also store this in Redis
+        # In a real implementation, we would also store this in Valkey/Redis
         # For now, we'll just log it
         logger.debug(f"Logged transaction: {log_entry}")

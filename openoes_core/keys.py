@@ -1,7 +1,7 @@
 """
 OpenOES Key Management Module
 
-This module provides utilities for generating and managing Redis keys
+This module provides utilities for generating and managing Valkey/Redis keys
 according to the OpenOES Community Edition standards.
 """
 
@@ -275,10 +275,10 @@ def parse_settlement_key(key: str) -> Dict[str, Any]:
 
 class KeyManager:
     """
-    Manages Redis keys for the OpenOES system.
+    Manages Valkey/Redis keys for the OpenOES system.
     
     This class provides a unified interface for generating and parsing
-    Redis keys according to the OpenOES standards.
+    Valkey/Redis keys according to the OpenOES standards.
     """
     
     @staticmethod
@@ -339,10 +339,10 @@ class KeyManager:
     @staticmethod
     def parse_key(key: str) -> Dict[str, Any]:
         """
-        Parse a Redis key to extract its components.
+        Parse a Valkey/Redis key to extract its components.
         
         Args:
-            key: Redis key to parse
+            key: Valkey/Redis key to parse
             
         Returns:
             Dictionary with parsed components

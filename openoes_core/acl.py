@@ -1,7 +1,7 @@
 """
 OpenOES ACL Management Module
 
-This module provides utilities for setting up and managing Redis ACLs
+This module provides utilities for setting up and managing Valkey/Redis ACLs
 for the OpenOES Community Edition architecture, which requires
 specific ACL configurations for the Stream-Writeable Replica.
 """
@@ -27,7 +27,7 @@ def setup_exchange_acl(
     writing to stream keys and basic connection commands.
     
     Args:
-        client: Redis client with admin privileges
+        client: Valkey/Redis client with admin privileges
         username: Username for the Exchange user
         password: Password for the Exchange user
         stream_patterns: Optional list of stream key patterns to restrict access to.
@@ -90,7 +90,7 @@ def setup_wsp_acl(
     Set up ACL for the WSP user with full access except dangerous commands.
     
     Args:
-        client: Redis client with admin privileges
+        client: Valkey/Redis client with admin privileges
         username: Username for the WSP user
         password: Password for the WSP user
         
@@ -122,7 +122,7 @@ def disable_default_user(client: redis.Redis) -> bool:
     Disable the default user for security.
     
     Args:
-        client: Redis client with admin privileges
+        client: Valkey/Redis client with admin privileges
         
     Returns:
         True if disabling was successful, False otherwise
@@ -154,7 +154,7 @@ def setup_basic_acls(
     the default user for security.
     
     Args:
-        client: Redis client with admin privileges
+        client: Valkey/Redis client with admin privileges
         exchange_username: Username for the Exchange user
         exchange_password: Password for the Exchange user
         wsp_username: Username for the WSP user
@@ -203,7 +203,7 @@ def test_exchange_acl(
     This is useful for verifying that the Exchange ACL is set up correctly.
     
     Args:
-        client: Redis client with Exchange user credentials
+        client: Valkey/Redis client with Exchange user credentials
         stream_key: Stream key to test writing to
         
     Returns:
@@ -229,7 +229,7 @@ def test_wsp_acl(client: redis.Redis) -> bool:
     This is useful for verifying that the WSP ACL is set up correctly.
     
     Args:
-        client: Redis client with WSP user credentials
+        client: Valkey/Redis client with WSP user credentials
         
     Returns:
         True if the connection has full WSP access, False otherwise
@@ -262,7 +262,7 @@ def get_acl_list(client: redis.Redis) -> List[Dict[str, Any]]:
     Get a list of all ACL users and their rules.
     
     Args:
-        client: Redis client with admin privileges
+        client: Valkey/Redis client with admin privileges
         
     Returns:
         List of dictionaries containing user information
@@ -313,7 +313,7 @@ class ACLManager:
         Initialize the ACL manager with an admin client.
         
         Args:
-            admin_client: Redis client with admin privileges
+            admin_client: Valkey/Redis client with admin privileges
         """
         self.admin_client = admin_client
     

@@ -3,7 +3,7 @@ OpenOES WSP Client
 
 This module provides the main client interface for WSP integration with OpenOES,
 serving as a unified API for all WSP operations including credit requests, settlement
-processing, pledge management, and vault operations.
+processing, pledge management, and vault operations over Valkey/Redis streams.
 """
 
 import logging
@@ -33,7 +33,7 @@ class WSPClient:
     credit requests, settlement processing, pledge management, and vault operations.
     
     Attributes:
-        connection_manager: Redis connection manager
+        connection_manager: Valkey/Redis connection manager
         config: Configuration object
         custodian_id: Custodian identifier
         credit_manager: Credit request manager
@@ -51,7 +51,7 @@ class WSPClient:
         Initialize the WSP client.
         
         Args:
-            connection_manager: Redis connection manager
+            connection_manager: Valkey/Redis connection manager
             config: Configuration object
             custodian_id: Custodian identifier
             response_timeout: Timeout in seconds for waiting for responses

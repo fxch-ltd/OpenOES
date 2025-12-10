@@ -277,10 +277,10 @@ class Event:
     @classmethod
     def from_stream_message(cls, message: Dict[bytes, bytes]) -> 'Event':
         """
-        Create an event from a Redis stream message.
+        Create an event from a Valkey/Redis stream message.
         
         Args:
-            message: Redis stream message
+            message: Valkey/Redis stream message
             
         Returns:
             Event instance
@@ -323,9 +323,9 @@ class Event:
 
 class EventPublisher:
     """
-    Publishes events to Redis streams.
+    Publishes events to Valkey/Redis streams.
     
-    This class provides functionality for publishing events to Redis streams,
+    This class provides functionality for publishing events to Valkey/Redis streams,
     with support for different event types and automatic validation.
     """
     
@@ -340,7 +340,7 @@ class EventPublisher:
         Initialize the event publisher.
         
         Args:
-            client: Redis client
+            client: Valkey/Redis client
             stream_name: Name of the stream to publish to
             max_len: Maximum length of the stream
             source: Default source for events
@@ -639,9 +639,9 @@ class EventFilter:
 
 class EventSubscriber:
     """
-    Subscribes to events from Redis streams.
+    Subscribes to events from Valkey/Redis streams.
     
-    This class provides functionality for subscribing to events from Redis streams,
+    This class provides functionality for subscribing to events from Valkey/Redis streams,
     with support for filtering and callback handling.
     """
     
@@ -661,7 +661,7 @@ class EventSubscriber:
         Initialize the event subscriber.
         
         Args:
-            client: Redis client
+            client: Valkey/Redis client
             stream_name: Name of the stream to subscribe to
             group_name: Optional consumer group name
             consumer_name: Optional consumer name
@@ -969,7 +969,7 @@ def create_event_publisher(
     Create an event publisher.
     
     Args:
-        client: Redis client
+        client: Valkey/Redis client
         stream_name: Name of the stream to publish to
         max_len: Maximum length of the stream
         source: Default source for events
@@ -991,7 +991,7 @@ def create_event_subscriber(
     Create an event subscriber.
     
     Args:
-        client: Redis client
+        client: Valkey/Redis client
         stream_name: Name of the stream to subscribe to
         group_name: Optional consumer group name
         consumer_name: Optional consumer name
@@ -1032,7 +1032,7 @@ def publish_event(
     Publish an event to a stream.
     
     Args:
-        client: Redis client
+        client: Valkey/Redis client
         stream_name: Name of the stream to publish to
         event_type: Type of the event
         data: Event-specific data
