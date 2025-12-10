@@ -46,7 +46,7 @@ def event_publisher_example():
     )
     
     try:
-        # Get Redis client
+        # Get Valkey/Redis client
         client = connection_manager.get_wsp_client()
         
         # Create event publisher
@@ -170,7 +170,7 @@ def event_subscriber_example():
     )
     
     try:
-        # Get Redis client
+        # Get Valkey/Redis client
         client = connection_manager.get_wsp_client()
         
         # Create event subscriber
@@ -266,7 +266,7 @@ def event_router_example():
     )
     
     try:
-        # Get Redis client
+        # Get Valkey/Redis client
         client = connection_manager.get_wsp_client()
         
         # Create event router
@@ -414,7 +414,7 @@ def integrated_example():
     )
     
     try:
-        # Get Redis client
+        # Get Valkey/Redis client
         client = connection_manager.get_wsp_client()
         
         # Create event publisher

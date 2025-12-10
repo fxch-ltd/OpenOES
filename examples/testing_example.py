@@ -42,10 +42,10 @@ logger = logging.getLogger(__name__)
 
 
 def mock_redis_example():
-    """Example of using the MockRedisClient."""
-    logger.info("Starting MockRedisClient example")
+    """Example of using the MockValkey/RedisClient."""
+    logger.info("Starting MockValkey/RedisClient example")
     
-    # Create a mock Redis client
+    # Create a mock Valkey/Redis client
     mock_redis = MockRedisClient()
     
     # Set a key
@@ -78,7 +78,7 @@ def mock_redis_example():
     group_data = mock_redis.xreadgroup("test-group", "test-consumer", {"test-stream": ">"}, count=10)
     logger.info(f"Retrieved consumer group data: {group_data}")
     
-    logger.info("MockRedisClient example completed")
+    logger.info("MockValkey/RedisClient example completed")
 
 
 def data_generator_example():
@@ -304,7 +304,7 @@ def main():
     """Run all examples."""
     logger.info("Starting Testing module examples")
     
-    # Run mock Redis example
+    # Run mock Valkey/Redis example
     mock_redis_example()
     
     # Run data generator example

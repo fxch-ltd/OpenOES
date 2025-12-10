@@ -40,18 +40,18 @@ def wsp_example():
         wsp_client = connection_manager.get_wsp_client()
         replica_client = connection_manager.get_replica_client()
         
-        logger.info("Checking WSP Redis connection")
+        logger.info("Checking WSP Valkey/Redis connection")
         if wsp_client.ping():
-            logger.info("WSP Redis connection successful")
+            logger.info("WSP Valkey/Redis connection successful")
         else:
-            logger.error("WSP Redis connection failed")
+            logger.error("WSP Valkey/Redis connection failed")
             return
         
-        logger.info("Checking Replica Redis connection")
+        logger.info("Checking Replica Valkey/Redis connection")
         if replica_client.ping():
-            logger.info("Replica Redis connection successful")
+            logger.info("Replica Valkey/Redis connection successful")
         else:
-            logger.error("Replica Redis connection failed")
+            logger.error("Replica Valkey/Redis connection failed")
             return
         
         # Example: Generate keys
@@ -122,18 +122,18 @@ def exchange_example():
         wsp_client = connection_manager.get_wsp_client()
         replica_client = connection_manager.get_replica_client()
         
-        logger.info("Checking WSP Redis connection")
+        logger.info("Checking WSP Valkey/Redis connection")
         if wsp_client.ping():
-            logger.info("WSP Redis connection successful")
+            logger.info("WSP Valkey/Redis connection successful")
         else:
-            logger.error("WSP Redis connection failed")
+            logger.error("WSP Valkey/Redis connection failed")
             return
         
-        logger.info("Checking Replica Redis connection")
+        logger.info("Checking Replica Valkey/Redis connection")
         if replica_client.ping():
-            logger.info("Replica Redis connection successful")
+            logger.info("Replica Valkey/Redis connection successful")
         else:
-            logger.error("Replica Redis connection failed")
+            logger.error("Replica Valkey/Redis connection failed")
             return
         
         # Example: Read credit requests (placeholder until ExchangeClient is implemented)
