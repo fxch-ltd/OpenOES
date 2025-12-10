@@ -3,7 +3,7 @@ OpenOES Testing Response Validators
 
 This module provides validators for testing the OpenOES SDK,
 including validators for credit requests, settlement reports, and other
-responses.
+responses with Valkey/Redis backends.
 """
 
 import time

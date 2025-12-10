@@ -191,7 +191,7 @@ class CreditRequestManager:
         Initialize the credit request manager.
         
         Args:
-            connection_manager: Redis connection manager
+            connection_manager: Valkey/Redis connection manager
             custodian_id: Custodian identifier
             response_timeout: Timeout in seconds for waiting for responses
             auto_start_processor: Whether to automatically start the response processor
@@ -200,14 +200,14 @@ class CreditRequestManager:
         self.custodian_id = custodian_id
         self.response_timeout = response_timeout
         
-        # Get Redis clients
+        # Get Valkey/Redis clients for stream processing
         self.wsp_client = connection_manager.get_wsp_client()
         
-        # Create stream publisher for credit requests
+        # Create stream publisher for credit requests to Valkey/Redis streams
         self.request_stream = KeyManager.credit_request_stream()
         self.publisher = StreamPublisher(self.wsp_client, self.request_stream)
         
-        # Create stream processor for credit responses
+        # Create stream processor for credit responses from Valkey/Redis streams
         self.response_stream = KeyManager.credit_response_stream()
         self.processor = StreamProcessor(
             self.wsp_client,

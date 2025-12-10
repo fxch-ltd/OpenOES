@@ -55,9 +55,9 @@ class TestScenario:
         Args:
             wsp_client: WSP client (created if None)
             exchange_client: Exchange client (created if None)
-            connection_manager: Redis connection manager (created if None)
+            connection_manager: Valkey/Redis connection manager (created if None)
             config: Configuration (created if None)
-            use_mock: Whether to use mock Redis clients
+            use_mock: Whether to use mock Valkey/Redis clients for testing
         """
         self.use_mock = use_mock
         
@@ -81,11 +81,11 @@ class TestScenario:
         # Create connection manager if not provided
         if connection_manager is None:
             if use_mock:
-                # Create mock Redis clients
+                # Create mock Valkey/Redis clients for testing
                 wsp_redis = MockRedisClient()
                 replica_redis = MockRedisClient()
                 
-                # Create connection manager with mock clients
+                # Create connection manager with mock Valkey/Redis clients
                 self.connection_manager = RedisConnectionManager(
                     wsp_config=self.config.get("wsp_redis"),
                     replica_config=self.config.get("replica_redis"),
@@ -151,7 +151,7 @@ class TestScenario:
         """
         logger.info("Tearing down test scenario")
         
-        # Close clients
+        # Close Valkey/Redis clients
         self.wsp_client.close()
         self.exchange_client.close()
     

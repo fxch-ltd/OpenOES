@@ -34,14 +34,15 @@ This program is distributed in the hope that it will be useful, but WITHOUT ANY 
 
 You should have received a copy of the GNU Affero General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
 
-## Contribution to Redis
+## Contribution to Valkey and Redis Ecosystem
 
-The OpenOES Community Edition SDK acknowledges Redis as the backbone of our solution. Redis is an open-source, in-memory data structure store, used as a database, cache, and message broker. Redis is the essential infrastructure that enables our real-time, secure communication between Wallet Service Providers and Exchanges.
+The OpenOES Community Edition SDK acknowledges Valkey as the primary backbone of our solution, with full Redis compatibility. Valkey is an open-source, high-performance data structure store used as a database, cache, and message broker, while Redis remains fully supported for existing deployments. Both Valkey and Redis provide the essential infrastructure that enables our real-time, secure communication between Wallet Service Providers and Exchanges.
 
-We are committed to contributing to the Redis ecosystem by:
+We are committed to contributing to both the Valkey and Redis ecosystems by:
 
-1. Sharing our implementations and use cases that may benefit the broader Redis community
-2. Supporting the Redis open-source project where possible
-3. Adhering to Redis best practices and standards
+1. Sharing our implementations and use cases that may benefit the broader Valkey and Redis communities
+2. Supporting both open-source projects where possible
+3. Adhering to Valkey and Redis best practices and standards
+4. Promoting migration to Valkey for enhanced performance while maintaining Redis compatibility
 
 Redis is a trademark of Redis Ltd. Any rights therein are reserved to Redis Ltd. Any use by the OpenOES Community Edition SDK is for referential purposes only and does not indicate any sponsorship, endorsement or affiliation between Redis and FXCH Ltd.

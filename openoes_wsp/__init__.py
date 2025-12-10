@@ -2,7 +2,7 @@
 OpenOES Community Edition SDK - WSP Module
 
 This module provides components for Wallet Service Provider (WSP) integration with
-the OpenOES Community Edition system, including credit request management,
+the OpenOES Community Edition system over Valkey/Redis streams, including credit request management,
 settlement processing, and pledge management.
 """
 

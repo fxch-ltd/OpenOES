@@ -3,7 +3,7 @@ OpenOES Exchange Client
 
 This module provides the main client interface for Exchange integration with OpenOES,
 serving as a unified API for all Exchange operations including credit management, settlement
-processing, and account integration.
+processing, and account integration over Valkey/Redis (Redis-compatible) streams.
 """
 
 import logging
@@ -31,7 +31,7 @@ class ExchangeClient:
     credit management, settlement processing, and account integration.
     
     Attributes:
-        connection_manager: Redis connection manager
+        connection_manager: Valkey/Redis connection manager
         config: Configuration object
         credit_manager: Credit manager for processing credit requests
     """
@@ -49,7 +49,7 @@ class ExchangeClient:
         Initialize the Exchange client.
         
         Args:
-            connection_manager: Redis connection manager
+            connection_manager: Valkey/Redis (Redis-compatible) connection manager
             config: Configuration object
             approved_custodians: Optional list of approved custodian IDs
             approved_assets: Optional list of approved asset IDs
@@ -60,7 +60,7 @@ class ExchangeClient:
         self.connection_manager = connection_manager
         self.config = config
         
-        # Get Redis clients
+        # Get Valkey/Redis (Redis-compatible) clients
         self.wsp_client = connection_manager.get_wsp_client()
         self.replica_client = connection_manager.get_replica_client()
         

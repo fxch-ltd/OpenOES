@@ -6,7 +6,7 @@ A comprehensive Python SDK for integrating with the OpenOES system, providing to
 
 ## Overview
 
-The OpenOES SDK simplifies integration with the OpenOES system by providing a standardized approach for "off-Exchange" integration between cryptocurrency exchanges and custodians. It leverages Redis distributed cache technology to allow exchanges to "mirror" user asset balances held at Wallet Service Providers (WSPs) and custodians without requiring direct asset transfers.
+The OpenOES SDK simplifies integration with the OpenOES system by providing a standardized approach for "off-Exchange" integration between cryptocurrency exchanges and custodians. It leverages Valkey distributed cache technology (with full Redis compatibility) to allow exchanges to "mirror" user asset balances held at Wallet Service Providers (WSPs) and custodians without requiring direct asset transfers.
 
 This standard enables users to trade on exchanges using assets that remain securely held at their custodian of choice, addressing key challenges in the cryptocurrency trading ecosystem.
 
@@ -32,10 +32,10 @@ flowchart LR
     WSP -->|"Subscribe"| REPLICA
 ```
 
-The OpenOES uses a specific Redis architecture:
+The OpenOES uses a specific Valkey/Redis architecture:
 
-1. A main Redis instance at the WSP
-2. A replica Redis instance with a special ACL configuration that allows the Exchange to:
+1. A main Valkey/Redis instance at the WSP
+2. A replica Valkey/Redis instance with a special ACL configuration that allows the Exchange to:
    - Write specifically to stream keys
    - Read Credit Inventory (CI) values
 
@@ -44,8 +44,8 @@ This architecture ensures data integrity while enabling real-time communication 
 ## Key Features
 
 - **Standardized Integration**: One standard that works with multiple custodians and exchanges
-- **Connection Management**: Simplified Redis connection handling for both WSP and Exchange environments
-- **Key Management**: Standardized Redis key patterns for consistent data storage
+- **Connection Management**: Simplified Valkey/Redis connection handling for both WSP and Exchange environments
+- **Key Management**: Standardized Valkey/Redis key patterns for consistent data storage
 - **ACL Management**: Secure access control for different components
 - **Stream Processing**: Real-time event handling for pledges, settlements, and notifications
 - **Credit Management**: Tools for managing credit requests, approvals, and inventory
@@ -67,8 +67,8 @@ pip install -e .
 ### Prerequisites
 
 - Python 3.7+
-- Redis 5.0+ (Redis 6.0+ recommended for enhanced security features)
-- redis-py client library
+- Valkey 8.0+ or Redis 6.0+ (Valkey recommended for enhanced performance and features)
+- redis-py client library (compatible with both Valkey and Redis)
 
 ## Comprehensive Usage Guide
 
@@ -474,24 +474,24 @@ credit_response = {"status": "accepted", "ci": "10.0"}
 assert ResponseValidators.validate_credit_response(credit_response)
 ```
 
-## Redis as the Backbone
+## Valkey/Redis as the Backbone
 
 <img src="assets/openoes_logo.jpeg" alt="OpenOES Architecture" width="300" align="right"/>
 
-Redis is the backbone of the OpenOES solution, providing the critical infrastructure for real-time communication between WSPs and Exchanges. The OpenOES leverages several key Redis features:
+Valkey (with full Redis compatibility) serves as the backbone of the OpenOES solution, providing the critical infrastructure for real-time communication between WSPs and Exchanges. Valkey is recommended as the primary backend due to its enhanced performance and active community development, while maintaining full compatibility with existing Redis deployments. The OpenOES leverages several key Valkey/Redis features:
 
-### Redis Streams
+### Valkey/Redis Streams
 
-Redis Streams are used for event-driven communication between WSPs and Exchanges. This provides:
+Valkey/Redis Streams are used for event-driven communication between WSPs and Exchanges. This provides:
 
 - Real-time event processing
 - Reliable message delivery
 - Consumer groups for load balancing
 - Message acknowledgment and recovery
 
-### Redis ACLs
+### Valkey/Redis ACLs
 
-Access Control Lists (ACLs) in Redis 6.0+ provide fine-grained security controls:
+Access Control Lists (ACLs) in Valkey 8.0+ and Redis 6.0+ provide fine-grained security controls:
 
 - Restricted write access for Exchanges (limited to stream keys)
 - Restricted read access for Exchanges (limited to CI keys)
@@ -499,11 +499,11 @@ Access Control Lists (ACLs) in Redis 6.0+ provide fine-grained security controls
 - Command-level permissions
 - User-based authentication
 
-### Redis Replication
+### Valkey/Redis Replication
 
-The OpenOES architecture uses Redis replication with a special configuration:
+The OpenOES architecture uses Valkey/Redis replication with a special configuration:
 
-- WSP Redis instance as the master
+- WSP Valkey/Redis instance as the master
 - Stream-Writeable Replica at the Exchange
 - Special ACL configuration to allow limited writes to the replica and reading of CI values
 
@@ -527,7 +527,7 @@ Contributions to the OpenOES SDK are welcome. Please follow these steps to contr
 
 ### Acknowledgments
 
-OpenOES is built on Redis, an open-source, in-memory data structure store used as a database, cache, and message broker. We extend our gratitude to the Redis community for creating and maintaining this powerful tool that serves as the backbone of our solution.
+OpenOES is built on Valkey (with Redis compatibility), an open-source, high-performance data store used as a database, cache, and message broker. We extend our gratitude to both the Valkey and Redis communities for creating and maintaining these powerful tools that serve as the backbone of our solution.
 
 ---
 

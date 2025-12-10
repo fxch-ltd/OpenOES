@@ -3,7 +3,7 @@ OpenOES Testing Data Generators
 
 This module provides data generators for testing the OpenOES SDK,
 including generators for credit requests, settlement reports, and other data
-needed for testing.
+needed for testing with Valkey/Redis backends.
 """
 
 import time

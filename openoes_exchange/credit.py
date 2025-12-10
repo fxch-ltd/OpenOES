@@ -3,7 +3,7 @@ OpenOES Exchange Credit Manager
 
 This module provides functionality for the Exchange to process credit requests
 from WSPs, including request validation, credit inventory management, and
-response generation.
+response generation with Valkey/Redis backend storage.
 """
 
 import time
@@ -275,7 +275,7 @@ class CreditInventoryManager:
         Initialize the credit inventory manager.
         
         Args:
-            client: Optional Redis client for persistent storage
+            client: Optional Valkey/Redis (Redis-compatible) client for persistent storage of credit inventory data
         """
         self.client = client
         self.inventories = {}  # In-memory cache: {user_id}:{asset} -> CreditInventory
@@ -297,13 +297,13 @@ class CreditInventoryManager:
         if key in self.inventories:
             return self.inventories[key]
         
-        # If Redis client is available, check Redis
+        # If Valkey/Redis (Redis-compatible) client is available, check persistent storage
         if self.client:
             redis_key = KeyManager.credit_inventory(user_id, asset)
             data = self.client.hgetall(redis_key)
             
             if data:
-                # Convert Redis hash to dictionary
+                # Convert Valkey/Redis hash to dictionary
                 inventory_data = {
                     "user_id": user_id,
                     "asset": asset,
@@ -330,7 +330,7 @@ class CreditInventoryManager:
         key = f"{inventory.user_id}:{inventory.asset}"
         self.inventories[key] = inventory
         
-        # If Redis client is available, update Redis
+        # If Valkey/Redis (Redis-compatible) client is available, update persistent storage
         if self.client:
             redis_key = KeyManager.credit_inventory(inventory.user_id, inventory.asset)
             data = {
@@ -342,7 +342,7 @@ class CreditInventoryManager:
                 self.client.hmset(redis_key, data)
                 return True
             except Exception as e:
-                logger.error(f"Error updating credit inventory in Redis: {e}")
+                logger.error(f"Error updating credit inventory in Valkey/Redis persistent storage: {e}")
                 return False
         
         return True
@@ -430,7 +430,7 @@ class CreditManager:
         Initialize the credit manager.
         
         Args:
-            connection_manager: Redis connection manager
+            connection_manager: Valkey/Redis connection manager
             inventory_manager: Optional credit inventory manager
             validator: Optional credit validator
             approved_custodians: Optional list of approved custodian IDs
@@ -439,7 +439,7 @@ class CreditManager:
         """
         self.connection_manager = connection_manager
         
-        # Get Redis clients
+        # Get Valkey/Redis (Redis-compatible) clients for stream processing
         self.wsp_client = connection_manager.get_wsp_client()
         self.replica_client = connection_manager.get_replica_client()
         
@@ -452,7 +452,7 @@ class CreditManager:
             approved_assets=approved_assets
         )
         
-        # Create stream processor for credit requests
+        # Create stream processor for credit requests from Valkey/Redis (Redis-compatible) streams
         self.request_stream = KeyManager.credit_request_stream()
         self.processor = StreamProcessor(
             self.wsp_client,
@@ -461,7 +461,7 @@ class CreditManager:
             auto_create_group=True
         )
         
-        # Create stream publisher for credit responses
+        # Create stream publisher for credit responses to Valkey/Redis (Redis-compatible) streams
         self.response_stream = KeyManager.credit_response_stream()
         self.publisher = StreamPublisher(self.replica_client, self.response_stream)
         

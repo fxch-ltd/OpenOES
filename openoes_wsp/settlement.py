@@ -235,18 +235,18 @@ class SettlementClient:
         Initialize the settlement client.
         
         Args:
-            connection_manager: Redis connection manager
+            connection_manager: Valkey/Redis connection manager
             custodian_id: Custodian identifier
             auto_start_processor: Whether to automatically start the settlement processor
         """
         self.connection_manager = connection_manager
         self.custodian_id = custodian_id
         
-        # Get Redis clients
+        # Get Valkey/Redis clients
         self.wsp_client = connection_manager.get_wsp_client()
         self.replica_client = connection_manager.get_replica_client()
         
-        # Create stream processor for settlement reports
+        # Create stream processor for settlement reports from Valkey/Redis streams
         self.settlement_stream = KeyManager.settlement_report_stream()
         self.processor = StreamProcessor(
             self.wsp_client,
@@ -255,7 +255,7 @@ class SettlementClient:
             auto_create_group=True
         )
         
-        # Create stream publisher for settlement confirmations
+        # Create stream publisher for settlement confirmations to Valkey/Redis streams
         self.confirmation_stream = KeyManager.settlement_confirmation_stream()
         self.publisher = StreamPublisher(self.replica_client, self.confirmation_stream)
         

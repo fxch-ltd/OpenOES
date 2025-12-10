@@ -2,7 +2,8 @@
 OpenOES Exchange Settlement Manager
 
 This module provides functionality for Exchange to generate settlement reports,
-manage the settlement process, and process settlement confirmations from WSPs.
+manage the settlement process, and process settlement confirmations from WSPs
+using Valkey/Redis stream processing.
 """
 
 import time
@@ -303,13 +304,13 @@ class SettlementManager:
         Initialize the settlement manager.
         
         Args:
-            connection_manager: Redis connection manager
+            connection_manager: Valkey/Redis (Redis-compatible) connection manager
             inventory_manager: Optional credit inventory manager
             auto_start_processor: Whether to automatically start the confirmation processor
         """
         self.connection_manager = connection_manager
         
-        # Get Redis clients
+        # Get Valkey/Redis (Redis-compatible) clients
         self.wsp_client = connection_manager.get_wsp_client()
         self.replica_client = connection_manager.get_replica_client()
         
@@ -319,11 +320,11 @@ class SettlementManager:
         else:
             self.inventory_manager = inventory_manager
         
-        # Create stream publisher for settlement reports
+        # Create stream publisher for settlement reports to Valkey/Redis (Redis-compatible) streams
         self.settlement_stream = KeyManager.settlement_report_stream()
         self.publisher = StreamPublisher(self.replica_client, self.settlement_stream)
         
-        # Create stream processor for settlement confirmations
+        # Create stream processor for settlement confirmations from Valkey/Redis (Redis-compatible) streams
         self.confirmation_stream = KeyManager.settlement_confirmation_stream()
         self.processor = StreamProcessor(
             self.replica_client,

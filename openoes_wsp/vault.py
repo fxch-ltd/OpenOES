@@ -254,13 +254,13 @@ class VaultManager:
         Initialize the vault manager.
         
         Args:
-            connection_manager: Redis connection manager
+            connection_manager: Valkey/Redis connection manager
             custodian_id: Custodian identifier
         """
         self.connection_manager = connection_manager
         self.custodian_id = custodian_id
         
-        # Get Redis clients
+        # Get Valkey/Redis clients
         self.wsp_client = connection_manager.get_wsp_client()
         
         # Create Lobster Basket Policy
@@ -351,7 +351,7 @@ class VaultManager:
         
         self.user_assets[user_id][asset].append(vault_asset)
         
-        # Store in Redis
+        # Store in Valkey/Redis persistent storage
         self._store_vault_asset(vault_asset)
         
         return vault_asset
@@ -375,7 +375,7 @@ class VaultManager:
         
         vault_asset.lock()
         
-        # Update in Redis
+        # Update in Valkey/Redis persistent storage
         self._store_vault_asset(vault_asset)
         
         return True
@@ -399,7 +399,7 @@ class VaultManager:
         
         vault_asset.unlock()
         
-        # Update in Redis
+        # Update in Valkey/Redis
         self._store_vault_asset(vault_asset)
         
         return True
@@ -440,7 +440,7 @@ class VaultManager:
             asset_obj.unlock()
             unlocked_assets.append(asset_obj)
             
-            # Update in Redis
+            # Update in Valkey/Redis persistent storage
             self._store_vault_asset(asset_obj)
         
         logger.info(f"Unlocked {len(unlocked_assets)} assets")
@@ -598,26 +598,26 @@ class VaultManager:
     
     def _store_vault_asset(self, vault_asset: VaultAsset):
         """
-        Store a vault asset in Redis.
+        Store a vault asset in Valkey/Redis persistent storage.
         
         Args:
             vault_asset: Vault asset to store
         """
-        # In a real implementation, we would store the vault asset in Redis
+        # In a real implementation, we would store the vault asset in Valkey/Redis persistent storage
         # For now, we'll just log it
         logger.debug(f"Storing vault asset: {vault_asset}")
         
-        # Example Redis storage (commented out)
+        # Example Valkey/Redis persistent storage (commented out)
         # key = KeyManager.vault_asset(vault_asset.vault_id)
         # self.wsp_client.hset(key, mapping=vault_asset.to_dict())
     
     def _load_vault_assets(self):
-        """Load vault assets from Redis."""
-        # In a real implementation, we would load vault assets from Redis
+        """Load vault assets from Valkey/Redis persistent storage."""
+        # In a real implementation, we would load vault assets from Valkey/Redis persistent storage
         # For now, we'll just log it
         logger.debug("Loading vault assets")
         
-        # Example Redis loading (commented out)
+        # Example Valkey/Redis persistent storage loading (commented out)
         # keys = self.wsp_client.keys(KeyManager.vault_asset("*"))
         # for key in keys:
         #     data = self.wsp_client.hgetall(key)
@@ -636,9 +636,9 @@ class VaultManager:
         #         )
         #         if "unlock_timestamp" in data:
         #             vault_asset.unlock_timestamp = int(data["unlock_timestamp"])
-        #         
+        #
         #         self.vault_assets[vault_id] = vault_asset
-        #         
+        #
         #         # Add to user assets
         #         user_id = vault_asset.user_id
         #         asset = vault_asset.asset

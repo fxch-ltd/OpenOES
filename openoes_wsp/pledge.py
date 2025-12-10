@@ -352,22 +352,22 @@ class PledgeManager:
         Initialize the pledge manager.
         
         Args:
-            connection_manager: Redis connection manager
+            connection_manager: Valkey/Redis connection manager
             custodian_id: Custodian identifier
             auto_start_processor: Whether to automatically start the response processor
         """
         self.connection_manager = connection_manager
         self.custodian_id = custodian_id
         
-        # Get Redis clients
+        # Get Valkey/Redis clients for stream processing
         self.wsp_client = connection_manager.get_wsp_client()
         self.replica_client = connection_manager.get_replica_client()
         
-        # Create stream publisher for pledge requests
+        # Create stream publisher for pledge requests to Valkey/Redis streams
         self.request_stream = KeyManager.pledge_request_stream()
         self.publisher = StreamPublisher(self.wsp_client, self.request_stream)
         
-        # Create stream processor for pledge responses
+        # Create stream processor for pledge responses from Valkey/Redis streams
         self.response_stream = KeyManager.pledge_response_stream()
         self.processor = StreamProcessor(
             self.replica_client,
@@ -608,7 +608,7 @@ class PledgeManager:
                 logger.error(f"Error processing pledge response: {e}")
                 return False
         
-        # Process pledge responses
+        # Process pledge responses from Valkey/Redis streams
         self.processor.process_messages(response_handler)
     
     def get_pledge_request(self, request_id: str) -> Optional[PledgeRequest]:
