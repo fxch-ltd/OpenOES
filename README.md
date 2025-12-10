@@ -527,7 +527,7 @@ Contributions to the OpenOES SDK are welcome. Please follow these steps to contr
 
 ### Acknowledgments
 
-OpenOES is built on Redis, an open-source, in-memory data structure store used as a database, cache, and message broker. We extend our gratitude to the Redis community for creating and maintaining this powerful tool that serves as the backbone of our solution.
+OpenOES is built on Valkey, an open-source, in-memory data structure store used as a database, cache, and message broker. We extend our gratitude to the Redis community for creating and maintaining this powerful tool that serves as the backbone of our solution.
 
 ---
 
