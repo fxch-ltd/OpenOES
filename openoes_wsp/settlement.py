@@ -1,5 +1,5 @@
 """
-Redis Mirror CE WSP Settlement Client
+OpenOES WSP Settlement Client
 
 This module provides functionality for WSP to process settlement reports from the Exchange,
 manage the settlement process, and confirm settlement completion.
@@ -10,12 +10,12 @@ import logging
 import json
 from typing import Dict, Any, Optional, List, Callable, Union, Tuple
 
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     RedisConnectionManager,
     KeyManager,
     StreamProcessor,
     StreamPublisher,
-    RedisMirrorError,
+    OpenOESError,
     ValidationError,
     TimeoutError
 )

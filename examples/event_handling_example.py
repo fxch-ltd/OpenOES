@@ -1,5 +1,5 @@
 """
-Redis Mirror CE SDK - Event Handling Example
+OpenOES SDK - Event Handling Example
 
 This example demonstrates how to use the Event Handling module for publishing,
 subscribing to, and routing events.
@@ -9,8 +9,8 @@ import time
 import logging
 import json
 import threading
-from sdk_ce.redis_mirror_core import (
-    Configuration, 
+from openoes_core import (
+    Configuration,
     ConfigurationProfile,
     RedisConnectionManager,
     EventType,

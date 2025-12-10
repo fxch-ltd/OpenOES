@@ -1,5 +1,5 @@
 """
-Redis Mirror CE SDK - Stream Processing Example
+OpenOES SDK - Stream Processing Example
 
 This example demonstrates how to use the stream processing module for both
 publishing and consuming messages using Redis Streams.
@@ -9,8 +9,8 @@ import time
 import logging
 import json
 import uuid
-from sdk_ce.redis_mirror_core import (
-    Configuration, 
+from openoes_core import (
+    Configuration,
     ConfigurationProfile,
     RedisConnectionManager,
     StreamProcessor,

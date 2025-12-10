@@ -1,8 +1,8 @@
 """
-Redis Mirror CE Key Management Module
+OpenOES Key Management Module
 
 This module provides utilities for generating and managing Redis keys
-according to the Redis Mirror Community Edition standards.
+according to the OpenOES Community Edition standards.
 """
 
 import logging
@@ -14,7 +14,7 @@ logger = logging.getLogger(__name__)
 
 def generate_credit_inventory_key(user_id: str, asset: str) -> str:
     """
-    Generate a Credit Inventory (CI) key following the Redis Mirror CE standard.
+    Generate a Credit Inventory (CI) key following the OpenOES standard.
     
     Credit Inventory keys represent the double-entry bookkeeping mechanism for
     tracking pledged assets and obligations.
@@ -33,7 +33,7 @@ def generate_credit_inventory_key(user_id: str, asset: str) -> str:
 
 def generate_exchange_stream_key(stream_type: str, identifier: str) -> str:
     """
-    Generate an Exchange stream key following the Redis Mirror CE standard.
+    Generate an Exchange stream key following the OpenOES standard.
     
     Exchange stream keys are used for communication between the Exchange and WSP.
     
@@ -55,7 +55,7 @@ def generate_custodian_stream_key(
     stream_type: str
 ) -> str:
     """
-    Generate a Custodian stream key following the Redis Mirror CE standard.
+    Generate a Custodian stream key following the OpenOES standard.
     
     Custodian stream keys are used for communication from the WSP to the Exchange.
     
@@ -78,7 +78,7 @@ def generate_pledge_request_key(
     asset_id: str
 ) -> str:
     """
-    Generate a pledge request key following the Redis Mirror CE standard.
+    Generate a pledge request key following the OpenOES standard.
     
     Format: custodian:{custodian_id}:{user_id}:{asset_id}:pledge
     
@@ -98,7 +98,7 @@ def generate_pledge_response_key(
     user_id: str
 ) -> str:
     """
-    Generate a pledge response key following the Redis Mirror CE standard.
+    Generate a pledge response key following the OpenOES standard.
     
     Format: exchange:{custodian_id}:{user_id}:pledge_response
     
@@ -114,7 +114,7 @@ def generate_pledge_response_key(
 
 def generate_settlement_report_key(custodian_id: str, user_id: str = None) -> str:
     """
-    Generate a settlement report key following the Redis Mirror CE standard.
+    Generate a settlement report key following the OpenOES standard.
     
     Format: settlement:{user_id} if user_id is provided
     Format: exchange:{custodian_id}:settlement_report if user_id is not provided
@@ -133,7 +133,7 @@ def generate_settlement_report_key(custodian_id: str, user_id: str = None) -> st
 
 def generate_settlement_completion_key(custodian_id: str, user_id: str = None) -> str:
     """
-    Generate a settlement completion key following the Redis Mirror CE standard.
+    Generate a settlement completion key following the OpenOES standard.
     
     Format: settlement:{user_id} if user_id is provided
     Format: exchange:{custodian_id}:settlement_completion if user_id is not provided
@@ -275,10 +275,10 @@ def parse_settlement_key(key: str) -> Dict[str, Any]:
 
 class KeyManager:
     """
-    Manages Redis keys for the Redis Mirror CE system.
+    Manages Redis keys for the OpenOES system.
     
     This class provides a unified interface for generating and parsing
-    Redis keys according to the Redis Mirror CE standards.
+    Redis keys according to the OpenOES standards.
     """
     
     @staticmethod

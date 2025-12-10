@@ -1,5 +1,5 @@
 """
-Redis Mirror CE SDK - Credit Request Example
+OpenOES SDK - Credit Request Example
 
 This example demonstrates how to use the WSP Credit Request Manager to create
 and manage credit requests to the Exchange.
@@ -8,12 +8,12 @@ and manage credit requests to the Exchange.
 import time
 import logging
 import json
-from sdk_ce.redis_mirror_core import (
-    Configuration, 
+from openoes_core import (
+    Configuration,
     ConfigurationProfile,
     RedisConnectionManager
 )
-from sdk_ce.redis_mirror_wsp import (
+from openoes_wsp import (
     CreditRequest,
     CreditRequestManager
 )

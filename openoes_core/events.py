@@ -1,8 +1,8 @@
 """
-Redis Mirror CE Event Handling Module
+OpenOES Event Handling Module
 
 This module provides functionality for standardized event handling across the
-Redis Mirror Community Edition system, including event publishing, subscription,
+OpenOES Community Edition system, including event publishing, subscription,
 and routing.
 """
 
@@ -22,7 +22,7 @@ from .streams import (
     read_messages,
     read_messages_from_group
 )
-from .errors import ValidationError, RedisMirrorError
+from .errors import ValidationError, OpenOESError
 
 # Configure logging
 logger = logging.getLogger(__name__)
@@ -30,7 +30,7 @@ logger = logging.getLogger(__name__)
 
 class EventType(enum.Enum):
     """
-    Standard event types for the Redis Mirror CE system.
+    Standard event types for the OpenOES system.
     
     Event types are organized by category and name, in the format:
     {category}:{name}
@@ -139,7 +139,7 @@ class EventType(enum.Enum):
 
 class Event:
     """
-    Represents an event in the Redis Mirror CE system.
+    Represents an event in the OpenOES system.
     
     Events are used for communication between components and follow a
     standardized format.

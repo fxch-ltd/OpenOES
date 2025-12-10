@@ -1,7 +1,7 @@
 """
-Redis Mirror Community Edition SDK - Exchange Module
+OpenOES Community Edition SDK - Exchange Module
 
-This module provides components for Exchange integration with the Redis Mirror
+This module provides components for Exchange integration with the OpenOES
 Community Edition system, including credit management, settlement processing,
 and account integration.
 """

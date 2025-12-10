@@ -1,8 +1,8 @@
 """
-Redis Mirror CE ACL Management Module
+OpenOES ACL Management Module
 
 This module provides utilities for setting up and managing Redis ACLs
-for the Redis Mirror Community Edition architecture, which requires
+for the OpenOES Community Edition architecture, which requires
 specific ACL configurations for the Stream-Writeable Replica.
 """
 
@@ -302,7 +302,7 @@ def get_acl_list(client: redis.Redis) -> List[Dict[str, Any]]:
 
 class ACLManager:
     """
-    Manages ACLs for the Redis Mirror CE system.
+    Manages ACLs for the OpenOES system.
     
     This class provides a unified interface for setting up and testing
     ACLs for both WSP and Exchange users.

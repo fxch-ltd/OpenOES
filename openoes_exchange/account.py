@@ -1,5 +1,5 @@
 """
-Redis Mirror CE Exchange Account Integration
+OpenOES Exchange Account Integration
 
 This module provides functionality for integrating with exchange accounts,
 including updating user accounts based on credit changes, tracking funding
@@ -11,10 +11,10 @@ import logging
 import json
 from typing import Dict, Any, Optional, List, Callable, Union, Tuple, Set
 
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     RedisConnectionManager,
     KeyManager,
-    RedisMirrorError,
+    OpenOESError,
     ValidationError,
     TimeoutError
 )

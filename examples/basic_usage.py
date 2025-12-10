@@ -1,14 +1,14 @@
 """
-Redis Mirror CE SDK - Basic Usage Example
+OpenOES SDK - Basic Usage Example
 
-This example demonstrates how to use the Redis Mirror CE SDK for both WSP and Exchange integration.
+This example demonstrates how to use the OpenOES SDK for both WSP and Exchange integration.
 """
 
 import logging
 import json
 import os
-from sdk_ce.redis_mirror_core import (
-    Configuration, 
+from openoes_core import (
+    Configuration,
     ConfigurationProfile,
     RedisConnectionManager,
     KeyManager

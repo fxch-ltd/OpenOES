@@ -1,14 +1,14 @@
 """
-Redis Mirror CE SDK - Mock Redis Example
+OpenOES SDK - Mock Redis Example
 
 This example demonstrates how to use the Mock Redis Client for testing
-Redis Mirror CE SDK components without requiring an actual Redis server.
+OpenOES SDK components without requiring an actual Redis server.
 """
 
 import time
 import logging
-from sdk_ce.redis_mirror_testing import MockRedisClient
-from sdk_ce.redis_mirror_core import (
+from openoes_testing import MockRedisClient
+from openoes_core import (
     KeyManager,
     StreamProcessor,
     StreamPublisher

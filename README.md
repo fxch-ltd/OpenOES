@@ -1,18 +1,18 @@
-# REDIS Mirror SDK
+# OpenOES SDK
 
-<img src="assets/redis_mirror_logo.jpeg" alt="Redis Mirror Logo" width="1000"/>
+<img src="assets/openoes_logo.jpeg" alt="OpenOES Logo" width="1000"/>
 
-A comprehensive Python SDK for integrating with the REDIS Mirror system, providing tools for both Wallet Service Providers (WSPs) and Exchanges. Created by [FXCH Ltd.](https://fxclr.com)
+A comprehensive Python SDK for integrating with the OpenOES system, providing tools for both Wallet Service Providers (WSPs) and Exchanges. Created by [FXCH Ltd.](https://fxclr.com)
 
 ## Overview
 
-The REDIS Mirror SDK simplifies integration with the Redis Mirror system by providing a standardized approach for "off-Exchange" integration between cryptocurrency exchanges and custodians. It leverages Redis distributed cache technology to allow exchanges to "mirror" user asset balances held at Wallet Service Providers (WSPs) and custodians without requiring direct asset transfers.
+The OpenOES SDK simplifies integration with the OpenOES system by providing a standardized approach for "off-Exchange" integration between cryptocurrency exchanges and custodians. It leverages Redis distributed cache technology to allow exchanges to "mirror" user asset balances held at Wallet Service Providers (WSPs) and custodians without requiring direct asset transfers.
 
 This standard enables users to trade on exchanges using assets that remain securely held at their custodian of choice, addressing key challenges in the cryptocurrency trading ecosystem.
 
 ## Architecture
 
-Redis Mirror operates on a unique architecture that enables secure, real-time communication between WSPs and Exchanges:
+OpenOES operates on a unique architecture that enables secure, real-time communication between WSPs and Exchanges:
 
 ```mermaid
 flowchart LR
@@ -32,7 +32,7 @@ flowchart LR
     WSP -->|"Subscribe"| REPLICA
 ```
 
-The REDIS Mirror uses a specific Redis architecture:
+The OpenOES uses a specific Redis architecture:
 
 1. A main Redis instance at the WSP
 2. A replica Redis instance with a special ACL configuration that allows the Exchange to:
@@ -56,11 +56,11 @@ This architecture ensures data integrity while enabling real-time communication 
 
 ```bash
 # Not yet available on PyPI
-# pip install redis-mirror-ce
+# pip install openoes
 
 # For now, clone the repository and install locally
 git clone <repository-url>
-cd redis-mirror-ce
+cd openoes
 pip install -e .
 ```
 
@@ -74,11 +74,11 @@ pip install -e .
 
 ### WSP Integration
 
-The SDK provides a complete toolkit for WSP integration with the REDIS Mirror system:
+The SDK provides a complete toolkit for WSP integration with the OpenOES system:
 
 ```python
-from sdk_ce.redis_mirror_core import Configuration, RedisConnectionManager
-from sdk_ce.redis_mirror_wsp import WSPClient
+from openoes_core import Configuration, RedisConnectionManager
+from openoes_wsp import WSPClient
 
 # Initialize configuration
 config = Configuration.from_file('config.json')
@@ -127,8 +127,8 @@ connection_manager.close()
 The SDK also provides tools for Exchange integration:
 
 ```python
-from sdk_ce.redis_mirror_core import Configuration, RedisConnectionManager
-from sdk_ce.redis_mirror_exchange import ExchangeClient
+from openoes_core import Configuration, RedisConnectionManager
+from openoes_exchange import ExchangeClient
 
 # Initialize configuration
 config = Configuration.from_file('config.json')
@@ -178,10 +178,10 @@ connection_manager.close()
 
 ### Event-Driven Architecture
 
-REDIS Mirror uses Redis Streams for event-driven communication:
+OpenOES uses Redis Streams for event-driven communication:
 
 ```python
-from sdk_ce.redis_mirror_core import StreamProcessor, KeyManager
+from openoes_core import StreamProcessor, KeyManager
 
 # Create a stream processor
 stream_processor = StreamProcessor(redis_client, consumer_group="my-app", consumer_name="consumer-1")
@@ -208,7 +208,7 @@ stream_processor.process_stream(
 The SDK provides utilities for managing Redis connections:
 
 ```python
-from sdk_ce.redis_mirror_core import RedisConnectionManager
+from openoes_core import RedisConnectionManager
 
 # Create connection manager
 connection_manager = RedisConnectionManager(
@@ -241,7 +241,7 @@ with RedisConnectionManager(wsp_config, replica_config) as manager:
 The SDK provides utilities for generating and parsing Redis keys:
 
 ```python
-from sdk_ce.redis_mirror_core import KeyManager
+from openoes_core import KeyManager
 
 # Generate keys
 ci_key = KeyManager.credit_inventory("user123", "BTC")
@@ -256,7 +256,7 @@ key_info = KeyManager.parse_key("CI:user123:BTC")
 The SDK provides utilities for setting up and managing Redis ACLs:
 
 ```python
-from sdk_ce.redis_mirror_core import ACLManager, RedisConnectionManager
+from openoes_core import ACLManager, RedisConnectionManager
 
 # Create connection manager with admin privileges
 connection_manager = RedisConnectionManager(wsp_config)
@@ -279,13 +279,13 @@ acl_manager.test_exchange_permissions(exchange_client, "exchange:stream:test")
 The SDK provides utilities for managing configuration:
 
 ```python
-from sdk_ce.redis_mirror_core import Configuration, ConfigurationProfile
+from openoes_core import Configuration, ConfigurationProfile
 
 # Create configuration from file
 config = Configuration.from_file('config.json')
 
 # Create configuration from environment variables
-config = Configuration.from_env(prefix="REDIS_MIRROR_")
+config = Configuration.from_env(prefix="OPENOES_")
 
 # Use predefined profiles
 dev_config = ConfigurationProfile.development()
@@ -307,7 +307,7 @@ The WSP module provides components for WSP integration:
 ### Credit Request Manager
 
 ```python
-from sdk_ce.redis_mirror_wsp import CreditRequestManager
+from openoes_wsp import CreditRequestManager
 
 # Create credit request manager
 credit_manager = CreditRequestManager(connection_manager, config)
@@ -326,7 +326,7 @@ response = credit_manager.request_credit_increase(
 ### Settlement Client
 
 ```python
-from sdk_ce.redis_mirror_wsp import SettlementClient
+from openoes_wsp import SettlementClient
 
 # Create settlement client
 settlement_client = SettlementClient(connection_manager, config)
@@ -338,7 +338,7 @@ reports = settlement_client.process_settlement_reports()
 ### Pledge Manager
 
 ```python
-from sdk_ce.redis_mirror_wsp import PledgeManager
+from openoes_wsp import PledgeManager
 
 # Create pledge manager
 pledge_manager = PledgeManager(connection_manager, config)
@@ -357,7 +357,7 @@ pledge = pledge_manager.create_pledge(
 ### Vault Manager
 
 ```python
-from sdk_ce.redis_mirror_wsp import VaultManager
+from openoes_wsp import VaultManager
 
 # Create vault manager
 vault_manager = VaultManager(connection_manager, config)
@@ -373,7 +373,7 @@ The Exchange module provides components for Exchange integration:
 ### Credit Manager
 
 ```python
-from sdk_ce.redis_mirror_exchange import CreditManager
+from openoes_exchange import CreditManager
 
 # Create credit manager
 credit_manager = CreditManager(connection_manager, config)
@@ -388,7 +388,7 @@ ci_value = credit_manager.get_credit_inventory("user123", "BTC")
 ### Settlement Manager
 
 ```python
-from sdk_ce.redis_mirror_exchange import SettlementManager
+from openoes_exchange import SettlementManager
 
 # Create settlement manager
 settlement_manager = SettlementManager(connection_manager, config)
@@ -400,7 +400,7 @@ reports = settlement_manager.generate_settlement_reports()
 ### Credit Inventory Processor
 
 ```python
-from sdk_ce.redis_mirror_exchange import CreditInventoryProcessor
+from openoes_exchange import CreditInventoryProcessor
 
 # Create credit inventory processor
 inventory_processor = CreditInventoryProcessor(connection_manager, config)
@@ -415,7 +415,7 @@ ci_value = inventory_processor.get_inventory("user123", "BTC")
 ### Account Integration
 
 ```python
-from sdk_ce.redis_mirror_exchange import AccountIntegration
+from openoes_exchange import AccountIntegration
 
 # Create account integration
 account_integration = AccountIntegration(connection_manager, config)
@@ -431,7 +431,7 @@ The Testing module provides components for testing:
 ### Mock Redis Client
 
 ```python
-from sdk_ce.redis_mirror_testing import MockRedisClient
+from openoes_testing import MockRedisClient
 
 # Create mock Redis client
 mock_client = MockRedisClient()
@@ -447,7 +447,7 @@ assert mock_client.get("test:key") == "value"
 ### Data Generators
 
 ```python
-from sdk_ce.redis_mirror_testing import DataGenerators
+from openoes_testing import DataGenerators
 
 # Generate test data
 user_id = DataGenerators.generate_user_id()
@@ -457,7 +457,7 @@ credit_request = DataGenerators.generate_credit_request(user_id, "BTC", 10.0)
 ### Test Scenarios
 
 ```python
-from sdk_ce.redis_mirror_testing import TestScenarios
+from openoes_testing import TestScenarios
 
 # Run a test scenario
 scenario = TestScenarios.credit_request_approval_scenario()
@@ -467,7 +467,7 @@ scenario.run()
 ### Response Validators
 
 ```python
-from sdk_ce.redis_mirror_testing import ResponseValidators
+from openoes_testing import ResponseValidators
 
 # Validate a response
 credit_response = {"status": "accepted", "ci": "10.0"}
@@ -476,9 +476,9 @@ assert ResponseValidators.validate_credit_response(credit_response)
 
 ## Redis as the Backbone
 
-<img src="assets/redis_mirror_logo.jpeg" alt="REDIS Mirror Architecture" width="300" align="right"/>
+<img src="assets/openoes_logo.jpeg" alt="OpenOES Architecture" width="300" align="right"/>
 
-Redis is the backbone of the REDIS Mirror solution, providing the critical infrastructure for real-time communication between WSPs and Exchanges. The REDIS Mirror leverages several key Redis features:
+Redis is the backbone of the OpenOES solution, providing the critical infrastructure for real-time communication between WSPs and Exchanges. The OpenOES leverages several key Redis features:
 
 ### Redis Streams
 
@@ -501,7 +501,7 @@ Access Control Lists (ACLs) in Redis 6.0+ provide fine-grained security controls
 
 ### Redis Replication
 
-The REDIS Mirror architecture uses Redis replication with a special configuration:
+The OpenOES architecture uses Redis replication with a special configuration:
 
 - WSP Redis instance as the master
 - Stream-Writeable Replica at the Exchange
@@ -517,7 +517,7 @@ This project is licensed under the GNU Affero General Public License v3.0 (AGPL-
 
 ### Contribution
 
-Contributions to the REDIS Mirror SDK are welcome. Please follow these steps to contribute:
+Contributions to the OpenOES SDK are welcome. Please follow these steps to contribute:
 
 1. Fork the repository
 2. Create a feature branch
@@ -527,10 +527,10 @@ Contributions to the REDIS Mirror SDK are welcome. Please follow these steps to 
 
 ### Acknowledgments
 
-REDIS Mirror is built on Redis, an open-source, in-memory data structure store used as a database, cache, and message broker. We extend our gratitude to the Redis community for creating and maintaining this powerful tool that serves as the backbone of our solution.
+OpenOES is built on Redis, an open-source, in-memory data structure store used as a database, cache, and message broker. We extend our gratitude to the Redis community for creating and maintaining this powerful tool that serves as the backbone of our solution.
 
 ---
 
 <img src="assets/fxch_logo.png" alt="FXCH Logo" width="150"/>
 
-*REDIS Mirror SDK is created and maintained by [FXCH Ltd.](https://fxclr.com)*
+*OpenOES SDK is created and maintained by [FXCH Ltd.](https://fxclr.com)*

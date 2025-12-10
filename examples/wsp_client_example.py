@@ -1,19 +1,19 @@
 """
-Redis Mirror CE SDK - WSP Client Example
+OpenOES SDK - WSP Client Example
 
-This example demonstrates how to use the WSP Client to interact with the Redis Mirror CE system,
+This example demonstrates how to use the WSP Client to interact with the OpenOES system,
 including credit requests, settlement processing, and other operations.
 """
 
 import time
 import logging
 import json
-from sdk_ce.redis_mirror_core import (
-    Configuration, 
+from openoes_core import (
+    Configuration,
     ConfigurationProfile,
     RedisConnectionManager
 )
-from sdk_ce.redis_mirror_wsp import (
+from openoes_wsp import (
     WSPClient,
     CreditRequest
 )

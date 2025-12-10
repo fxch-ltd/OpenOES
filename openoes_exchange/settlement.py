@@ -1,5 +1,5 @@
 """
-Redis Mirror CE Exchange Settlement Manager
+OpenOES Exchange Settlement Manager
 
 This module provides functionality for Exchange to generate settlement reports,
 manage the settlement process, and process settlement confirmations from WSPs.
@@ -10,12 +10,12 @@ import logging
 import json
 from typing import Dict, Any, Optional, List, Callable, Union, Tuple
 
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     RedisConnectionManager,
     KeyManager,
     StreamProcessor,
     StreamPublisher,
-    RedisMirrorError,
+    OpenOESError,
     ValidationError,
     TimeoutError
 )

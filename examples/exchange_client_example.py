@@ -1,20 +1,20 @@
 """
-Redis Mirror CE SDK - Exchange Client Example
+OpenOES SDK - Exchange Client Example
 
-This example demonstrates how to use the Exchange Client to interact with the Redis Mirror CE system,
+This example demonstrates how to use the Exchange Client to interact with the OpenOES system,
 including credit management, settlement processing, and other operations.
 """
 
 import time
 import logging
 import json
-from sdk_ce.redis_mirror_core import (
-    Configuration, 
+from openoes_core import (
+    Configuration,
     ConfigurationProfile,
     RedisConnectionManager,
     StreamPublisher
 )
-from sdk_ce.redis_mirror_exchange import (
+from openoes_exchange import (
     ExchangeClient,
     CreditInventory
 )

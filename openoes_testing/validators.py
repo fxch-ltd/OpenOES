@@ -1,7 +1,7 @@
 """
-Redis Mirror CE Testing Response Validators
+OpenOES Testing Response Validators
 
-This module provides validators for testing the Redis Mirror CE SDK,
+This module provides validators for testing the OpenOES SDK,
 including validators for credit requests, settlement reports, and other
 responses.
 """
@@ -12,7 +12,7 @@ import json
 import re
 from typing import Dict, Any, Optional, List, Callable, Union, Tuple, Set
 
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     ValidationError
 )
 

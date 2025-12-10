@@ -1,5 +1,5 @@
 """
-Redis Mirror CE WSP Pledge Manager
+OpenOES WSP Pledge Manager
 
 This module provides functionality for WSPs to manage pledge operations,
 including creating pledge requests, tracking pledge status, and handling
@@ -11,12 +11,12 @@ import logging
 import json
 from typing import Dict, Any, Optional, List, Callable, Union, Tuple
 
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     RedisConnectionManager,
     KeyManager,
     StreamProcessor,
     StreamPublisher,
-    RedisMirrorError,
+    OpenOESError,
     ValidationError,
     TimeoutError
 )

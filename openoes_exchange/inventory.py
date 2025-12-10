@@ -1,5 +1,5 @@
 """
-Redis Mirror CE Exchange Credit Inventory Processor
+OpenOES Exchange Credit Inventory Processor
 
 This module provides functionality for managing credit inventory in the Exchange,
 including updating credit inventory during trading activities, handling automatic
@@ -11,10 +11,10 @@ import logging
 import json
 from typing import Dict, Any, Optional, List, Callable, Union, Tuple, Set
 
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     RedisConnectionManager,
     KeyManager,
-    RedisMirrorError,
+    OpenOESError,
     ValidationError,
     TimeoutError
 )

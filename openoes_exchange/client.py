@@ -1,7 +1,7 @@
 """
-Redis Mirror CE Exchange Client
+OpenOES Exchange Client
 
-This module provides the main client interface for Exchange integration with Redis Mirror CE,
+This module provides the main client interface for Exchange integration with OpenOES,
 serving as a unified API for all Exchange operations including credit management, settlement
 processing, and account integration.
 """
@@ -9,10 +9,10 @@ processing, and account integration.
 import logging
 from typing import Dict, Any, Optional, List, Callable, Union, Tuple
 
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     RedisConnectionManager,
     Configuration,
-    RedisMirrorError,
+    OpenOESError,
     ValidationError,
     TimeoutError
 )
@@ -25,7 +25,7 @@ logger = logging.getLogger(__name__)
 
 class ExchangeClient:
     """
-    Main client for Exchange integration with Redis Mirror CE.
+    Main client for Exchange integration with OpenOES.
     
     This class provides a unified API for all Exchange operations, including
     credit management, settlement processing, and account integration.

@@ -1,5 +1,5 @@
 """
-Redis Mirror CE Mock Redis Client
+OpenOES Mock Redis Client
 
 This module provides a mock implementation of the Redis client for testing purposes.
 It simulates Redis functionality without requiring an actual Redis server.
@@ -23,7 +23,7 @@ class MockRedisClient:
     
     This class simulates Redis functionality without requiring an actual Redis server.
     It implements the most commonly used Redis commands, with a focus on those used
-    by the Redis Mirror CE SDK.
+    by the OpenOES SDK.
     
     Attributes:
         data: Dictionary storing key-value pairs

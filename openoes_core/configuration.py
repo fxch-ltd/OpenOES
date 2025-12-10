@@ -1,7 +1,7 @@
 """
-Redis Mirror CE Configuration Module
+OpenOES Configuration Module
 
-This module provides standardized configuration options for the Redis Mirror CE SDK.
+This module provides standardized configuration options for the OpenOES SDK.
 """
 
 import os
@@ -16,10 +16,10 @@ logger = logging.getLogger(__name__)
 
 class Configuration:
     """
-    Configuration class for Redis Mirror CE SDK.
+    Configuration class for OpenOES SDK.
     
     This class provides a unified interface for managing configuration options
-    for the Redis Mirror CE SDK, including Redis connection settings, ACL settings,
+    for the OpenOES SDK, including Redis connection settings, ACL settings,
     and other SDK-specific options.
     """
     
@@ -47,7 +47,7 @@ class Configuration:
             "stream_patterns": ["exchange:stream:*", "mirror:credit:response", "mirror:settlement:*:response"]
         },
         "streams": {
-            "consumer_group_prefix": "redis_mirror_ce",
+            "consumer_group_prefix": "openoes",
             "batch_size": 10,
             "block_ms": 2000,
             "max_retry_count": 3,
@@ -202,12 +202,12 @@ class Configuration:
             raise ConfigurationError(f"Error loading configuration from {file_path}: {str(e)}")
     
     @classmethod
-    def from_env(cls, prefix: str = "REDIS_MIRROR_") -> 'Configuration':
+    def from_env(cls, prefix: str = "OPENOES_") -> 'Configuration':
         """
         Load configuration from environment variables.
         
         Environment variables should be prefixed with the specified prefix and use
-        double underscores to indicate nesting. For example, REDIS_MIRROR_WSP_REDIS__HOST
+        double underscores to indicate nesting. For example, OPENOES_WSP_REDIS__HOST
         would set the wsp_redis.host configuration value.
         
         Args:
@@ -282,7 +282,7 @@ class Configuration:
 
 class ConfigurationProfile:
     """
-    Predefined configuration profiles for common Redis Mirror CE setups.
+    Predefined configuration profiles for common OpenOES setups.
     """
     
     @staticmethod
@@ -391,7 +391,7 @@ class ConfigurationProfile:
                 "level": "DEBUG"
             },
             "streams": {
-                "consumer_group_prefix": "redis_mirror_ce_test",
+                "consumer_group_prefix": "openoes_test",
                 "batch_size": 5,
                 "block_ms": 1000,
                 "max_retry_count": 2,
