@@ -1,8 +1,8 @@
 """
-Redis Mirror CE SDK - Credit Inventory and Account Integration Example
+OpenOES SDK - Credit Inventory and Account Integration Example
 
 This example demonstrates how to use the Credit Inventory Processor and Account
-Integration components of the Redis Mirror CE SDK for Exchange integration.
+Integration components of the OpenOES SDK for Exchange integration.
 """
 
 import time
@@ -10,12 +10,12 @@ import logging
 import json
 from typing import Dict, Any
 
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     RedisConnectionManager,
     Configuration,
     ValidationError
 )
-from sdk_ce.redis_mirror_exchange import (
+from openoes_exchange import (
     ExchangeClient,
     CreditInventoryEntry,
     CreditInventoryProcessor,

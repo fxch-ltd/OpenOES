@@ -1,7 +1,7 @@
 """
-Redis Mirror Community Edition SDK - Core Module
+OpenOES Community Edition SDK - Core Module
 
-This module provides the foundational components for interacting with the Redis Mirror
+This module provides the foundational components for interacting with the OpenOES
 Community Edition system, including connection management, key management, stream processing,
 ACL management, event handling, and error handling.
 """
@@ -44,7 +44,7 @@ from .acl import (
 )
 
 from .errors import (
-    RedisMirrorError,
+    OpenOESError,
     ConnectionError,
     ACLError,
     StreamError,

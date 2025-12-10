@@ -1,7 +1,7 @@
 """
-Redis Mirror CE Error Handling Module
+OpenOES Error Handling Module
 
-This module provides standardized error classes for the Redis Mirror CE SDK.
+This module provides standardized error classes for the OpenOES SDK.
 """
 
 import logging
@@ -10,8 +10,8 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class RedisMirrorError(Exception):
-    """Base exception class for all Redis Mirror CE errors."""
+class OpenOESError(Exception):
+    """Base exception class for all OpenOES errors."""
     
     def __init__(self, message: str, *args, **kwargs):
         self.message = message
@@ -19,7 +19,7 @@ class RedisMirrorError(Exception):
         super().__init__(message, *args, **kwargs)
 
 
-class ConnectionError(RedisMirrorError):
+class ConnectionError(OpenOESError):
     """Exception raised for Redis connection errors."""
     
     def __init__(self, message: str, host: str = None, port: int = None, *args, **kwargs):
@@ -30,7 +30,7 @@ class ConnectionError(RedisMirrorError):
         super().__init__(message, *args, **kwargs)
 
 
-class ACLError(RedisMirrorError):
+class ACLError(OpenOESError):
     """Exception raised for Redis ACL errors."""
     
     def __init__(self, message: str, username: str = None, *args, **kwargs):
@@ -40,7 +40,7 @@ class ACLError(RedisMirrorError):
         super().__init__(message, *args, **kwargs)
 
 
-class StreamError(RedisMirrorError):
+class StreamError(OpenOESError):
     """Exception raised for Redis Stream errors."""
     
     def __init__(self, message: str, stream_name: str = None, *args, **kwargs):
@@ -50,7 +50,7 @@ class StreamError(RedisMirrorError):
         super().__init__(message, *args, **kwargs)
 
 
-class KeyError(RedisMirrorError):
+class KeyError(OpenOESError):
     """Exception raised for Redis key errors."""
     
     def __init__(self, message: str, key: str = None, *args, **kwargs):
@@ -60,7 +60,7 @@ class KeyError(RedisMirrorError):
         super().__init__(message, *args, **kwargs)
 
 
-class ValidationError(RedisMirrorError):
+class ValidationError(OpenOESError):
     """Exception raised for validation errors."""
     
     def __init__(self, message: str, field: str = None, value: str = None, *args, **kwargs):
@@ -73,7 +73,7 @@ class ValidationError(RedisMirrorError):
         super().__init__(message, *args, **kwargs)
 
 
-class CreditRequestError(RedisMirrorError):
+class CreditRequestError(OpenOESError):
     """Exception raised for credit request errors."""
     
     def __init__(self, message: str, request_id: str = None, user_id: str = None, 
@@ -96,7 +96,7 @@ class CreditRequestError(RedisMirrorError):
         super().__init__(message, *args, **kwargs)
 
 
-class SettlementError(RedisMirrorError):
+class SettlementError(OpenOESError):
     """Exception raised for settlement errors."""
     
     def __init__(self, message: str, settlement_id: str = None, user_id: str = None, 
@@ -116,7 +116,7 @@ class SettlementError(RedisMirrorError):
         super().__init__(message, *args, **kwargs)
 
 
-class ConfigurationError(RedisMirrorError):
+class ConfigurationError(OpenOESError):
     """Exception raised for configuration errors."""
     
     def __init__(self, message: str, parameter: str = None, *args, **kwargs):
@@ -126,7 +126,7 @@ class ConfigurationError(RedisMirrorError):
         super().__init__(message, *args, **kwargs)
 
 
-class TimeoutError(RedisMirrorError):
+class TimeoutError(OpenOESError):
     """Exception raised for timeout errors."""
     
     def __init__(self, message: str, operation: str = None, timeout: float = None, 
@@ -148,7 +148,7 @@ class TimeoutError(RedisMirrorError):
 
 def handle_redis_error(func):
     """
-    Decorator to handle Redis errors and convert them to Redis Mirror errors.
+    Decorator to handle Redis errors and convert them to OpenOES errors.
     
     Args:
         func: The function to decorate
@@ -160,38 +160,38 @@ def handle_redis_error(func):
         try:
             return func(*args, **kwargs)
         except ConnectionError as e:
-            # Already a Redis Mirror error, re-raise
+            # Already an OpenOES error, re-raise
             raise
         except ACLError as e:
-            # Already a Redis Mirror error, re-raise
+            # Already an OpenOES error, re-raise
             raise
         except StreamError as e:
-            # Already a Redis Mirror error, re-raise
+            # Already an OpenOES error, re-raise
             raise
         except KeyError as e:
-            # Already a Redis Mirror error, re-raise
+            # Already an OpenOES error, re-raise
             raise
         except ValidationError as e:
-            # Already a Redis Mirror error, re-raise
+            # Already an OpenOES error, re-raise
             raise
         except CreditRequestError as e:
-            # Already a Redis Mirror error, re-raise
+            # Already an OpenOES error, re-raise
             raise
         except SettlementError as e:
-            # Already a Redis Mirror error, re-raise
+            # Already an OpenOES error, re-raise
             raise
         except ConfigurationError as e:
-            # Already a Redis Mirror error, re-raise
+            # Already an OpenOES error, re-raise
             raise
         except TimeoutError as e:
-            # Already a Redis Mirror error, re-raise
+            # Already an OpenOES error, re-raise
             raise
-        except RedisMirrorError as e:
-            # Already a Redis Mirror error, re-raise
+        except OpenOESError as e:
+            # Already an OpenOES error, re-raise
             raise
         except Exception as e:
-            # Convert other exceptions to Redis Mirror errors
+            # Convert other exceptions to OpenOES errors
             logger.exception(f"Unhandled exception in {func.__name__}")
-            raise RedisMirrorError(f"Unhandled exception: {str(e)}")
+            raise OpenOESError(f"Unhandled exception: {str(e)}")
     
     return wrapper

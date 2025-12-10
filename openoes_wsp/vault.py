@@ -1,5 +1,5 @@
 """
-Redis Mirror CE WSP Vault Manager
+OpenOES WSP Vault Manager
 
 This module provides functionality for WSPs to manage vault operations,
 including locking and unlocking assets in the vault, applying the Lobster
@@ -11,10 +11,10 @@ import logging
 import json
 from typing import Dict, Any, Optional, List, Callable, Union, Tuple, Set
 
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     RedisConnectionManager,
     KeyManager,
-    RedisMirrorError,
+    OpenOESError,
     ValidationError,
     TimeoutError
 )

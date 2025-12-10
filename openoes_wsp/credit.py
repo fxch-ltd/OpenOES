@@ -1,5 +1,5 @@
 """
-Redis Mirror CE WSP Credit Request Manager
+OpenOES WSP Credit Request Manager
 
 This module provides functionality for WSP to create and manage credit requests
 to the Exchange, including request creation, tracking, and response handling.
@@ -10,12 +10,12 @@ import uuid
 import logging
 import json
 from typing import Dict, Any, Optional, List, Callable, Union
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     RedisConnectionManager,
     KeyManager,
     StreamPublisher,
     StreamProcessor,
-    RedisMirrorError,
+    OpenOESError,
     ValidationError,
     TimeoutError
 )
@@ -321,7 +321,7 @@ class CreditRequestManager:
         if not message_id:
             logger.error(f"Failed to publish credit request: {request}")
             del self.pending_requests[request.request_id]
-            raise RedisMirrorError(f"Failed to publish credit request: {request}")
+            raise OpenOESError(f"Failed to publish credit request: {request}")
         
         logger.debug(f"Published credit request with ID: {message_id}")
         

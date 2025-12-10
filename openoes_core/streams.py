@@ -1,8 +1,8 @@
 """
-Redis Mirror CE Stream Processing Module
+OpenOES Stream Processing Module
 
 This module provides utilities for working with Redis Streams in the
-Redis Mirror Community Edition architecture, including consumer groups,
+OpenOES Community Edition architecture, including consumer groups,
 message processing, and error handling.
 """
 

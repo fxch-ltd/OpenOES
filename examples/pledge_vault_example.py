@@ -1,8 +1,8 @@
 """
-Redis Mirror CE SDK - Pledge and Vault Example
+OpenOES SDK - Pledge and Vault Example
 
 This example demonstrates how to use the Pledge Manager and Vault Manager
-components of the Redis Mirror CE SDK for WSP integration.
+components of the OpenOES SDK for WSP integration.
 """
 
 import time
@@ -10,12 +10,12 @@ import logging
 import json
 from typing import Dict, Any
 
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     RedisConnectionManager,
     Configuration,
     ValidationError
 )
-from sdk_ce.redis_mirror_wsp import (
+from openoes_wsp import (
     WSPClient,
     PledgeRequest,
     PledgeResponse,

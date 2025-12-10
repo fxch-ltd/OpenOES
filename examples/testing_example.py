@@ -1,8 +1,8 @@
 """
-Redis Mirror CE SDK - Testing Example
+OpenOES SDK - Testing Example
 
 This example demonstrates how to use the Testing module components of the
-Redis Mirror CE SDK for testing integrations.
+OpenOES SDK for testing integrations.
 """
 
 import time
@@ -10,11 +10,11 @@ import logging
 import json
 from typing import Dict, Any
 
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     RedisConnectionManager,
     Configuration
 )
-from sdk_ce.redis_mirror_testing import (
+from openoes_testing import (
     MockRedisClient,
     DataGenerator,
     CreditRequestGenerator,

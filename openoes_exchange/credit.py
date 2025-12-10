@@ -1,5 +1,5 @@
 """
-Redis Mirror CE Exchange Credit Manager
+OpenOES Exchange Credit Manager
 
 This module provides functionality for the Exchange to process credit requests
 from WSPs, including request validation, credit inventory management, and
@@ -10,12 +10,12 @@ import time
 import logging
 import json
 from typing import Dict, Any, Optional, List, Callable, Union, Tuple
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     RedisConnectionManager,
     KeyManager,
     StreamProcessor,
     StreamPublisher,
-    RedisMirrorError,
+    OpenOESError,
     ValidationError
 )
 

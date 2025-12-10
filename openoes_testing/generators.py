@@ -1,7 +1,7 @@
 """
-Redis Mirror CE Testing Data Generators
+OpenOES Testing Data Generators
 
-This module provides data generators for testing the Redis Mirror CE SDK,
+This module provides data generators for testing the OpenOES SDK,
 including generators for credit requests, settlement reports, and other data
 needed for testing.
 """
@@ -13,7 +13,7 @@ import string
 import logging
 from typing import Dict, Any, Optional, List, Callable, Union, Tuple, Set
 
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     KeyManager,
     ValidationError
 )

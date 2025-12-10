@@ -1,7 +1,7 @@
 """
-Redis Mirror Community Edition SDK - Testing Module
+OpenOES Community Edition SDK - Testing Module
 
-This module provides tools for testing integrations with the Redis Mirror
+This module provides tools for testing integrations with the OpenOES
 Community Edition system, including mock Redis clients, data generators,
 test scenarios, and response validators.
 """

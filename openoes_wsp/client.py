@@ -1,7 +1,7 @@
 """
-Redis Mirror CE WSP Client
+OpenOES WSP Client
 
-This module provides the main client interface for WSP integration with Redis Mirror CE,
+This module provides the main client interface for WSP integration with OpenOES,
 serving as a unified API for all WSP operations including credit requests, settlement
 processing, pledge management, and vault operations.
 """
@@ -9,10 +9,10 @@ processing, pledge management, and vault operations.
 import logging
 from typing import Dict, Any, Optional, List, Callable, Union
 
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     RedisConnectionManager,
     Configuration,
-    RedisMirrorError,
+    OpenOESError,
     ValidationError,
     TimeoutError
 )
@@ -27,9 +27,9 @@ logger = logging.getLogger(__name__)
 
 class WSPClient:
     """
-    Main client for WSP integration with Redis Mirror CE.
+    Main client for WSP integration with OpenOES.
     
-    This class provides a unified API for all WSP operations, including 
+    This class provides a unified API for all WSP operations, including
     credit requests, settlement processing, pledge management, and vault operations.
     
     Attributes:

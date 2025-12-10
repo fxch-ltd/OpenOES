@@ -1,5 +1,5 @@
 """
-Redis Mirror CE SDK - Credit Manager Example
+OpenOES SDK - Credit Manager Example
 
 This example demonstrates how to use the Exchange Credit Manager to process
 credit requests from WSPs, validate them, update credit inventories, and
@@ -9,13 +9,13 @@ generate responses.
 import time
 import logging
 import json
-from sdk_ce.redis_mirror_core import (
-    Configuration, 
+from openoes_core import (
+    Configuration,
     ConfigurationProfile,
     RedisConnectionManager,
     StreamPublisher
 )
-from sdk_ce.redis_mirror_exchange import (
+from openoes_exchange import (
     CreditInventory,
     CreditValidator,
     CreditInventoryManager,

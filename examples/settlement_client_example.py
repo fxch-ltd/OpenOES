@@ -1,5 +1,5 @@
 """
-Redis Mirror CE SDK - Settlement Client Example
+OpenOES SDK - Settlement Client Example
 
 This example demonstrates how to use the Settlement Client to process settlement reports
 from the Exchange, confirm settlements, and manage the settlement process.
@@ -8,13 +8,13 @@ from the Exchange, confirm settlements, and manage the settlement process.
 import time
 import logging
 import json
-from sdk_ce.redis_mirror_core import (
-    Configuration, 
+from openoes_core import (
+    Configuration,
     ConfigurationProfile,
     RedisConnectionManager,
     StreamPublisher
 )
-from sdk_ce.redis_mirror_wsp import (
+from openoes_wsp import (
     WSPClient,
     SettlementReport
 )
@@ -83,7 +83,7 @@ def settlement_client_example():
         logger.info("Example 1: Publishing a test settlement report")
         
         # Get the settlement stream key
-        from sdk_ce.redis_mirror_core import KeyManager
+        from openoes_core import KeyManager
         settlement_stream = KeyManager.settlement_report_stream()
         
         # Create a publisher

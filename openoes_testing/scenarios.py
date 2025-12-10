@@ -1,7 +1,7 @@
 """
-Redis Mirror CE Testing Scenarios
+OpenOES Testing Scenarios
 
-This module provides test scenarios for testing the Redis Mirror CE SDK,
+This module provides test scenarios for testing the OpenOES SDK,
 including scenarios for credit requests, settlement processing, and other
 workflows.
 """
@@ -11,15 +11,15 @@ import logging
 import json
 from typing import Dict, Any, Optional, List, Callable, Union, Tuple, Set
 
-from sdk_ce.redis_mirror_core import (
+from openoes_core import (
     RedisConnectionManager,
     Configuration,
     ValidationError
 )
-from sdk_ce.redis_mirror_wsp import (
+from openoes_wsp import (
     WSPClient
 )
-from sdk_ce.redis_mirror_exchange import (
+from openoes_exchange import (
     ExchangeClient
 )
 from .generators import (

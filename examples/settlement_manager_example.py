@@ -1,5 +1,5 @@
 """
-Redis Mirror CE SDK - Settlement Manager Example
+OpenOES SDK - Settlement Manager Example
 
 This example demonstrates how to use the Exchange Settlement Manager to generate settlement reports,
 process settlement confirmations from WSPs, and manage the settlement process.
@@ -8,13 +8,13 @@ process settlement confirmations from WSPs, and manage the settlement process.
 import time
 import logging
 import json
-from sdk_ce.redis_mirror_core import (
-    Configuration, 
+from openoes_core import (
+    Configuration,
     ConfigurationProfile,
     RedisConnectionManager,
     StreamPublisher
 )
-from sdk_ce.redis_mirror_exchange import (
+from openoes_exchange import (
     ExchangeClient,
     SettlementReport,
     SettlementConfirmation
@@ -160,7 +160,7 @@ def settlement_manager_example():
         logger.info("Example 3: Publishing a test settlement confirmation")
         
         # Get the confirmation stream key
-        from sdk_ce.redis_mirror_core import KeyManager
+        from openoes_core import KeyManager
         confirmation_stream = KeyManager.settlement_confirmation_stream()
         
         # Create a publisher

@@ -1,8 +1,8 @@
 """
-Redis Mirror CE Connection Management Module
+OpenOES Connection Management Module
 
 This module provides utilities for creating and managing Redis connections
-for the Redis Mirror Community Edition architecture, which consists of:
+for the OpenOES Community Edition architecture, which consists of:
 1. A main Redis instance at the WSP
 2. A stream-writeable replica with special ACL configuration at the Exchange
 """
@@ -102,7 +102,7 @@ class RedisConnectionManager:
     Manages Redis connections for both WSP Redis and Stream-Writeable Replica.
     
     This class provides a unified interface for working with both Redis instances
-    in the Redis Mirror CE architecture.
+    in the OpenOES CE architecture.
     """
     
     def __init__(

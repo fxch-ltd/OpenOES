@@ -26,7 +26,7 @@ An older license, called the Affero General Public License and published by Affe
 
 For the full license text, please visit: https://www.gnu.org/licenses/agpl-3.0.en.html
 
-## Redis Mirror Community Edition SDK
+## OpenOES Community Edition SDK
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
 
@@ -36,7 +36,7 @@ You should have received a copy of the GNU Affero General Public License along w
 
 ## Contribution to Redis
 
-The Redis Mirror Community Edition SDK acknowledges Redis as the backbone of our solution. Redis is an open-source, in-memory data structure store, used as a database, cache, and message broker. Redis is the essential infrastructure that enables our real-time, secure communication between Wallet Service Providers and Exchanges.
+The OpenOES Community Edition SDK acknowledges Redis as the backbone of our solution. Redis is an open-source, in-memory data structure store, used as a database, cache, and message broker. Redis is the essential infrastructure that enables our real-time, secure communication between Wallet Service Providers and Exchanges.
 
 We are committed to contributing to the Redis ecosystem by:
 
@@ -44,4 +44,4 @@ We are committed to contributing to the Redis ecosystem by:
 2. Supporting the Redis open-source project where possible
 3. Adhering to Redis best practices and standards
 
-Redis is a trademark of Redis Ltd. Any rights therein are reserved to Redis Ltd. Any use by the Redis Mirror Community Edition SDK is for referential purposes only and does not indicate any sponsorship, endorsement or affiliation between Redis and FXCH Ltd.
+Redis is a trademark of Redis Ltd. Any rights therein are reserved to Redis Ltd. Any use by the OpenOES Community Edition SDK is for referential purposes only and does not indicate any sponsorship, endorsement or affiliation between Redis and FXCH Ltd.
