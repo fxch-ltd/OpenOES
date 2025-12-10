@@ -1,8 +1,8 @@
 """
-OpenOES SDK - Mock Redis Example
+OpenOES SDK - Mock Valkey/Redis Example
 
-This example demonstrates how to use the Mock Redis Client for testing
-OpenOES SDK components without requiring an actual Redis server.
+This example demonstrates how to use the Mock Valkey/Redis Client for testing
+OpenOES SDK components without requiring an actual Valkey/Redis server.
 """
 
 import time
@@ -23,10 +23,10 @@ logger = logging.getLogger(__name__)
 
 
 def basic_operations_example():
-    """Example of basic Redis operations with the mock client."""
+    """Example of basic Valkey/Redis operations with the mock client."""
     logger.info("Starting basic operations example")
     
-    # Create a mock Redis client
+    # Create a mock Valkey/Redis client
     client = MockRedisClient()
     
     # Key-Value operations
@@ -77,7 +77,7 @@ def stream_operations_example():
     """Example of stream operations with the mock client."""
     logger.info("Starting stream operations example")
     
-    # Create a mock Redis client
+    # Create a mock Valkey/Redis client
     client = MockRedisClient()
     
     # Create a stream key
@@ -136,7 +136,7 @@ def consumer_group_example():
     """Example of consumer group operations with the mock client."""
     logger.info("Starting consumer group example")
     
-    # Create a mock Redis client
+    # Create a mock Valkey/Redis client
     client = MockRedisClient()
     
     # Create a stream key
@@ -213,7 +213,7 @@ def pubsub_example():
     """Example of PubSub operations with the mock client."""
     logger.info("Starting PubSub example")
     
-    # Create a mock Redis client
+    # Create a mock Valkey/Redis client
     client = MockRedisClient()
     
     # Create a channel
@@ -256,7 +256,7 @@ def integration_example():
     """Example of using the mock client for integration testing."""
     logger.info("Starting integration example")
     
-    # Create a mock Redis client
+    # Create a mock Valkey/Redis client
     client = MockRedisClient()
     
     # Create stream keys
@@ -356,7 +356,7 @@ def integration_example():
 
 def main():
     """Run all examples."""
-    logger.info("Starting Mock Redis examples")
+    logger.info("Starting Mock Valkey/Redis examples")
     
     # Run basic operations example
     basic_operations_example()
@@ -373,7 +373,7 @@ def main():
     # Run integration example
     integration_example()
     
-    logger.info("All Mock Redis examples completed")
+    logger.info("All Mock Valkey/Redis examples completed")
 
 
 if __name__ == "__main__":

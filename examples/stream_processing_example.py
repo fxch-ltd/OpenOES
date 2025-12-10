@@ -2,7 +2,7 @@
 OpenOES SDK - Stream Processing Example
 
 This example demonstrates how to use the stream processing module for both
-publishing and consuming messages using Redis Streams.
+publishing and consuming messages using Valkey/Redis Streams.
 """
 
 import time
@@ -41,7 +41,7 @@ def publisher_example():
     )
     
     try:
-        # Get Redis client
+        # Get Valkey/Redis client
         client = connection_manager.get_wsp_client()
         
         # Create stream publisher
@@ -141,7 +141,7 @@ def consumer_example():
     )
     
     try:
-        # Get Redis client
+        # Get Valkey/Redis client
         client = connection_manager.get_wsp_client()
         
         # Stream and consumer group details
@@ -193,7 +193,7 @@ def consumer_group_example():
     )
     
     try:
-        # Get Redis client
+        # Get Valkey/Redis client
         client = connection_manager.get_wsp_client()
         
         # Stream and consumer group details
